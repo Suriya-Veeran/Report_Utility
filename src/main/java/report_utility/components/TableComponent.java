@@ -155,8 +155,8 @@ public class TableComponent implements ReportComponent {
                 .valueBackgroundColor(tableBean.getValueBackgroundColor() != null ? tableBean.getValueBackgroundColor() : TableBean.DEFAULT_CONFIG.getValueBackgroundColor())
                 .headerValueFontColor(tableBean.getHeaderValueFontColor() != null ? tableBean.getHeaderValueFontColor() : TableBean.DEFAULT_CONFIG.getValueFontColor())
                 .valueFontColor(tableBean.getValueFontColor() != null ? tableBean.getValueFontColor() : TableBean.DEFAULT_CONFIG.getValueFontColor())
-                .successFontColor(tableBean.getSuccessFontColor() != null ? tableBean.getSuccessFontColor() : TableBean.DEFAULT_CONFIG.getValueFontColor())
-                .errorFontColor(tableBean.getErrorFontColor() != null ? tableBean.getErrorFontColor() : TableBean.DEFAULT_CONFIG.getValueFontColor())
+                .successFontColor(tableBean.getSuccessFontColor() != null ? tableBean.getSuccessFontColor() : TableBean.DEFAULT_CONFIG.getSuccessFontColor())
+                .errorFontColor(tableBean.getErrorFontColor() != null ? tableBean.getErrorFontColor() : TableBean.DEFAULT_CONFIG.getErrorFontColor())
                 .build();
     }
 

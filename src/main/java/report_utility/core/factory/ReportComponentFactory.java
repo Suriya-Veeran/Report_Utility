@@ -25,7 +25,7 @@ public class ReportComponentFactory {
             case GRID_SECTION:
                 component = ReportBuilder.addComponent((GridTableBean) bean);
                 break;
-            case JOB_SUMMARY:
+            case CARD_SECTION:
                 component = ReportBuilder.addComponent((CardBean) bean);
                 break;
             case OBJECTIVE:

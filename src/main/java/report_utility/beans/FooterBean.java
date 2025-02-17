@@ -15,13 +15,10 @@ public class FooterBean implements ReportBean {
 
   private FontFamilyType fontFamily;
 
-
   public static final FooterBean DEFAULT_CONFIG =
-          FooterBean.builder()
-                  .fontSize(8f)
-                  .fontColor("#3F3F3F")
-                  .fontFamily(FontFamilyType.ROBOTO_REGULAR)
-                  .build();
-
-
+      FooterBean.builder()
+          .fontSize(8f)
+          .fontColor("#3F3F3F")
+          .fontFamily(FontFamilyType.ROBOTO_REGULAR)
+          .build();
 }

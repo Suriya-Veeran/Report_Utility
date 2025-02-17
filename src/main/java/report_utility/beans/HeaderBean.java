@@ -23,7 +23,7 @@ public class HeaderBean implements ReportBean {
     private ProductLogo productLogo; // product logo like ETL , ADS
 
     public static final HeaderBean DEFAULT_CONFIG = HeaderBean.builder()
-            .title("Materialized View Refresh Report")
+            .title("Consolidated Ingestion Report")
             .fontColor("#030303")
             .fontSize(16)
             .fontFamily(FontFamilyType.ROBOTO_REGULAR)
