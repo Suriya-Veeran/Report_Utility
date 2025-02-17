@@ -8,7 +8,9 @@ import com.itextpdf.kernel.pdf.canvas.draw.SolidLine;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.LineSeparator;
 import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.properties.TextAlignment;
 import com.itextpdf.layout.properties.UnitValue;
+import com.itextpdf.layout.properties.VerticalAlignment;
 import lombok.experimental.UtilityClass;
 
 import java.io.IOException;
@@ -91,10 +93,25 @@ public class CommonUtils {
         if (type.equalsIgnoreCase("Header")) {
             lineSeparator.setMarginTop(5);
             lineSeparator.setMarginBottom(1);
-        } else {
+        }
+        else {
             lineSeparator.setMarginTop(-15);
             lineSeparator.setMarginBottom(0);
         }
         document.add(new Paragraph().setMargin(0).setPadding(0).add(lineSeparator));
     }
+
+  public static void drawDivider(Document document, float lineWidth, String color, String type, int pageIndex, float yPosition) {
+    SolidLine solidLine = new SolidLine(lineWidth);
+    solidLine.setColor(hexaDecimalToRGB(color));
+    LineSeparator lineSeparator = new LineSeparator(solidLine);
+
+    float fullWidth = PageSize.A4.getWidth();
+    lineSeparator.setWidth(UnitValue.createPointValue(fullWidth));
+
+    document.showTextAligned(new Paragraph().add(lineSeparator),
+            fullWidth / 2, yPosition, pageIndex,
+            TextAlignment.CENTER, VerticalAlignment.BOTTOM, 0);
+  }
+
 }

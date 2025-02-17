@@ -40,8 +40,8 @@ public class ReportBuilder extends AbstractReport {
                 .inputBean(bean).build();
     }
 
-    public static ReportComponent addComponent(JobSummaryBean bean) {
-        return JobSummaryComponent.builder()
+    public static ReportComponent addComponent(CardBean bean) {
+        return CardComponent.builder()
                 .inputBean(bean).build();
     }
 

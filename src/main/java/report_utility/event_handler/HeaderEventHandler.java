@@ -65,6 +65,7 @@ public class HeaderEventHandler implements IEventHandler {
                     .setFontColor(hexaDecimalToRGB(headerBean.getFontColor()))
                     .setTextAlignment(TextAlignment.LEFT)
                     .setWidth(UnitValue.createPercentValue(100))
+//                    .setMarginTop(-10)
                     .setMultipliedLeading(1.2f)
                     .setKeepTogether(false);
 

@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import report_utility.beans.JobSummaryBean;
+import report_utility.beans.CardBean;
 import report_utility.core.interfaces.ReportComponent;
 
 import java.io.IOException;
@@ -14,9 +14,9 @@ import java.io.IOException;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class JobSummaryComponent implements ReportComponent {
+public class CardComponent implements ReportComponent {
 
-    private JobSummaryBean inputBean;
+    private CardBean inputBean;
 
 
     @Override

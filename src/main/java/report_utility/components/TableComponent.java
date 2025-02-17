@@ -15,14 +15,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import report_utility.beans.TableBean;
 import report_utility.core.interfaces.ReportComponent;
-import report_utility.utils.RoundedBorderCellRenderer;
+import report_utility.utils.RoundedTableRenderer;
+
 
 import java.io.IOException;
 import java.util.List;
 
 import static report_utility.utils.ColorUtils.hexaDecimalToRGB;
-import static report_utility.utils.CommonUtils.drawDivider;
-import static report_utility.utils.CommonUtils.loadFont;
+import static report_utility.utils.CommonUtils.*;
 
 @Builder
 @Data
@@ -44,18 +44,25 @@ public class TableComponent implements ReportComponent {
         table.setMarginRight(-18f);
         table.setPadding(0);
 
+        float borderRadius = 2f;
+        float borderWidth = 1f;
+        Color borderColor = hexaDecimalToRGB("DCDCDC");
+
         if (inputBean.getTitle() != null && !inputBean.getTitle().isEmpty()) {
             document.add(new Paragraph(inputBean.getTitle())
                     .setTextAlignment(TextAlignment.LEFT)
                     .setFontColor(hexaDecimalToRGB("030303"))
                     .setFontSize(13)
                     .setMarginLeft(-17)
-                    .setPaddingTop(5)
+                            .setMarginTop(0)
+                            .setMarginBottom(0)
+                            .setPadding(0)
                     .setFont(loadFont(inputBean.getFontFamily().getValue()))
             );
-            drawDivider(document, -18, -18, 1L, "BCBCBC");
+            drawDivider(document, -18, -18, 1L, "#B8B8B8");
         }
 
+        addEmptyLines(1, document);
         for (String header : inputBean.getHeaders()) {
 
             Paragraph paragraph = new Paragraph();
@@ -63,7 +70,7 @@ public class TableComponent implements ReportComponent {
 
             String[] parts = header.split(",", 2);
             paragraph
-                    .add(new Paragraph(parts[0]).setFixedLeading(10f))
+                    .add(new Paragraph(parts[0]).setFixedLeading(15f))
                     .setFontSize(inputBean.getFontSize());
 
             if (parts.length > 1) {
@@ -71,7 +78,7 @@ public class TableComponent implements ReportComponent {
                         .add("\n")
                         .add(
                                 new Paragraph(parts[1].trim())
-                                        .setPaddingTop(-45f)
+                                        .setPaddingTop(-25f)
                                         .setFontSize(inputBean.getFontSize()));
             }
 
@@ -82,8 +89,8 @@ public class TableComponent implements ReportComponent {
                             .setTextAlignment(TextAlignment.LEFT)
                             .setFontSize(inputBean.getFontSize())
                             .setBackgroundColor(hexaDecimalToRGB("DFEAFF"))
-                            .setPadding(10f);
-            headerCell.setNextRenderer(new RoundedBorderCellRenderer(headerCell, hexaDecimalToRGB("000000"), 1.5f, 8f));
+                            .setPaddingTop(2f)
+                            .setPaddingLeft(12f);
             table.addCell(headerCell);
         }
 
@@ -113,18 +120,23 @@ public class TableComponent implements ReportComponent {
                                 .setBorderLeft(Border.NO_BORDER)
                                 .setBorderRight(Border.NO_BORDER)
                                 .setFontColor(fontColor)
-                                .setPadding(10f);
+                                .setPadding(12f);
 
                 if (i == rowCount - 1) {
                     cell.setBorderBottom(Border.NO_BORDER);
                 } else {
                     cell.setBorderBottom(new SolidBorder(hexaDecimalToRGB("DCDCDC"), 1));
                 }
-                cell.setNextRenderer(new RoundedBorderCellRenderer(cell, hexaDecimalToRGB("DCDCDC"), 1.5f, 8f));
 
                 table.addCell(cell);
             }
         }
+    table.setNextRenderer(new RoundedTableRenderer(table,
+            borderRadius,
+            borderColor,
+            borderWidth,
+            hexaDecimalToRGB("FFFFFF"),
+            hexaDecimalToRGB("DFEAFF")));
         document.add(table);
     }
 
@@ -139,15 +151,21 @@ public class TableComponent implements ReportComponent {
                 .fontFamily(tableBean.getFontFamily() != null ? tableBean.getFontFamily() : TableBean.DEFAULT_CONFIG.getFontFamily())
                 .headers(tableBean.getHeaders() != null ? tableBean.getHeaders() : TableBean.DEFAULT_CONFIG.getHeaders())
                 .values(tableBean.getValues() != null ? tableBean.getValues() : TableBean.DEFAULT_CONFIG.getValues())
+                .headerBackgroundColor(tableBean.getHeaderBackgroundColor() != null ? tableBean.getHeaderBackgroundColor() : TableBean.DEFAULT_CONFIG.getHeaderBackgroundColor())
+                .valueBackgroundColor(tableBean.getValueBackgroundColor() != null ? tableBean.getValueBackgroundColor() : TableBean.DEFAULT_CONFIG.getValueBackgroundColor())
+                .headerValueFontColor(tableBean.getHeaderValueFontColor() != null ? tableBean.getHeaderValueFontColor() : TableBean.DEFAULT_CONFIG.getValueFontColor())
+                .valueFontColor(tableBean.getValueFontColor() != null ? tableBean.getValueFontColor() : TableBean.DEFAULT_CONFIG.getValueFontColor())
+                .successFontColor(tableBean.getSuccessFontColor() != null ? tableBean.getSuccessFontColor() : TableBean.DEFAULT_CONFIG.getValueFontColor())
+                .errorFontColor(tableBean.getErrorFontColor() != null ? tableBean.getErrorFontColor() : TableBean.DEFAULT_CONFIG.getValueFontColor())
                 .build();
     }
 
     private static Color retrieveCellFontColor(String value, TableBean inputBean) {
         Color fontColor;
         if (value.equalsIgnoreCase("Disposed Success") || value.equalsIgnoreCase("Success")) {
-            fontColor = hexaDecimalToRGB("007D2B");
+            fontColor = hexaDecimalToRGB(inputBean.getSuccessFontColor());
         } else if (value.equalsIgnoreCase("Disposed Failure") || value.equalsIgnoreCase("Failed")) {
-            fontColor = hexaDecimalToRGB("D60000");
+            fontColor = hexaDecimalToRGB(inputBean.getErrorFontColor());
         } else {
             fontColor = hexaDecimalToRGB("000000");
         }
