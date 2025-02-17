@@ -51,7 +51,7 @@ public class RoundedTableRenderer extends TableRenderer {
     float top = rect.getTop();
     float headerBottom = top - headerHeight;
 
-    // 1️⃣ Draw Table Background with Rounded Corners
+    //  Draw Table Background with Rounded Corners
     canvas.saveState();
     canvas.setFillColor(backgroundColor);
     canvas
@@ -59,7 +59,7 @@ public class RoundedTableRenderer extends TableRenderer {
         .fill(); // Rounded corners for table background
     canvas.restoreState();
 
-    // 2️⃣ Draw Header Background with Rounded Corners (Ensures it fits within table's rounded
+    //  Draw Header Background with Rounded Corners (Ensures it fits within table's rounded
     // edges)
     canvas.saveState();
     canvas.setFillColor(headerBackgroundColor);
@@ -69,7 +69,7 @@ public class RoundedTableRenderer extends TableRenderer {
         .fill(); // Rounded corners for header
     canvas.restoreState();
 
-    // 3️⃣ Draw Table Border (Rounded Corners)
+    //  Draw Table Border (Rounded Corners)
     canvas.saveState();
     canvas
         .setStrokeColor(borderColor)
