@@ -20,6 +20,7 @@ import report_utility.utils.RoundedTableRenderer;
 import java.io.IOException;
 import java.util.List;
 
+import static report_utility.constants.CommonConstants.*;
 import static report_utility.utils.ColorUtils.hexaDecimalToRGB;
 import static report_utility.utils.CommonUtils.*;
 
@@ -47,7 +48,7 @@ public class TableComponent implements ReportComponent {
               .setMarginBottom(0)
               .setPadding(0)
               .setFont(loadFont(inputBean.getFontFamily().getValue())));
-      drawDivider(document, -18, -18, 1L, "#B8B8B8");
+      drawDivider(document, MARGIN_LEFT, MARGIN_RIGHT, LINE_WIDTH_1L, "#B8B8B8");
     }
 
     addEmptyLines(1, document);
@@ -55,8 +56,8 @@ public class TableComponent implements ReportComponent {
       Table table = new Table(inputBean.getHeaders().size());
       table.setWidth(UnitValue.createPercentValue(100));
       table.setKeepTogether(false);
-      table.setMarginLeft(-18f);
-      table.setMarginRight(-18f);
+      table.setMarginLeft(MARGIN_LEFT);
+      table.setMarginRight(MARGIN_RIGHT);
       table.setPadding(0);
 
       float borderRadius = 2f;

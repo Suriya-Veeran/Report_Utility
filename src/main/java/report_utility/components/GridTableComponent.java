@@ -26,6 +26,7 @@
     import java.util.LinkedHashMap;
     import java.util.Map;
 
+    import static report_utility.constants.CommonConstants.*;
     import static report_utility.utils.ColorUtils.hexaDecimalToRGB;
     import static report_utility.utils.CommonUtils.*;
 
@@ -53,13 +54,13 @@
                         .setTextAlignment(TextAlignment.LEFT)
                         .setFontColor(hexaDecimalToRGB(inputBean.getTitleFontColor()))
                         .setFontSize(inputBean.getTitleFontSize())
-                        .setMarginLeft(-17)
+                        .setMarginLeft(MARGIN_LEFT)
                         .setMarginTop(0)
                         .setMarginBottom(0)
                         .setPadding(0)
                         .setFont(loadFont(inputBean.getTitleFontFamily().getValue()))
                 );
-                drawDivider(document, -18, -18, 1L, "BCBCBC");
+                drawDivider(document, MARGIN_LEFT, MARGIN_RIGHT, LINE_WIDTH_1L, "BCBCBC");
             }
 
             if (Boolean.TRUE.equals(inputBean.getIsJobStatusInclusion()) && inputBean.getJobStatusInputBean() != null) {
@@ -93,7 +94,7 @@
             table.setSkipLastFooter(true);
             document.add(table);
             if (inputBean.getTableType() == TableType.HEADER) {
-                drawDivider(document,  1L, "#BCBCBC", "Header Grid");
+                drawDivider(document,  LINE_WIDTH_1L, "#BCBCBC", "Header Grid");
             }
         }
 
@@ -146,8 +147,8 @@
             Table table = new Table(UnitValue.createPercentArray(new float[]{450L, 450L, 450L}));
             table.setWidth(UnitValue.createPercentValue(100));
             table.setKeepTogether(false);
-            table.setMarginLeft(-18);
-            table.setMarginRight(-18);
+            table.setMarginLeft(MARGIN_LEFT);
+            table.setMarginRight(MARGIN_RIGHT);
             table.setMarginTop(-10);
             table.setBorder(Border.NO_BORDER);
             setJobStatusCellValue(jobStatusInputBean, table);

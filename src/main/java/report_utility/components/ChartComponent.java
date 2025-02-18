@@ -78,7 +78,7 @@ public class ChartComponent implements ReportComponent {
     }
     chartTable.setFixedLayout();
     document.add(chartTable);
-    addEmptyLines(1, document);
+    addEmptyLines(5, document);
   }
 
   private ChartCreationConfig mergeWithDefaults(ChartCreationConfig inputBean) {

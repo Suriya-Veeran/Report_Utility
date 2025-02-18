@@ -1,5 +1,6 @@
 package report_utility.components;
 
+import static report_utility.constants.CommonConstants.*;
 import static report_utility.utils.ColorUtils.hexaDecimalToRGB;
 import static report_utility.utils.CommonUtils.*;
 
@@ -53,7 +54,7 @@ public class CardComponent implements ReportComponent {
     Table headerTable = new Table(2);
     headerTable.setWidth(UnitValue.createPercentValue(100));
     headerTable.setBackgroundColor(hexaDecimalToRGB(inputBean.getCardBackgroundColor()));
-    headerTable.setBorderBottom(new SolidBorder(hexaDecimalToRGB("DCDCDC"), 1f));
+    headerTable.setBorderBottom(new SolidBorder(hexaDecimalToRGB(BACKGROUND_COLOR), BORDER_WIDTH));
     headerTable.addCell(
         new Cell()
             .add(
@@ -75,15 +76,15 @@ public class CardComponent implements ReportComponent {
             .setBorder(Border.NO_BORDER)
             .setPadding(10)
             .setTextAlignment(TextAlignment.RIGHT));
-    headerTable.setMarginLeft(-18f);
-    headerTable.setMarginRight(-18f);
+    headerTable.setMarginLeft(MARGIN_LEFT);
+    headerTable.setMarginRight(MARGIN_LEFT);
     document.add(headerTable);
 
     Table contentTable = new Table(1);
     contentTable.setWidth(UnitValue.createPercentValue(100));
-    contentTable.setBorderBottom(new SolidBorder(hexaDecimalToRGB("DCDCDC"), 1f));
-    contentTable.setBorderLeft(new SolidBorder(hexaDecimalToRGB("DCDCDC"), 1f));
-    contentTable.setBorderRight(new SolidBorder(hexaDecimalToRGB("DCDCDC"), 1f));
+    contentTable.setBorderBottom(new SolidBorder(hexaDecimalToRGB(BACKGROUND_COLOR), BORDER_WIDTH));
+    contentTable.setBorderLeft(new SolidBorder(hexaDecimalToRGB(BACKGROUND_COLOR), BORDER_WIDTH));
+    contentTable.setBorderRight(new SolidBorder(hexaDecimalToRGB(BACKGROUND_COLOR), BORDER_WIDTH));
 
     Cell contentCell =
         new Cell()
@@ -94,8 +95,8 @@ public class CardComponent implements ReportComponent {
                     .setFontColor(hexaDecimalToRGB(inputBean.getValueFontColor())))
             .setBorder(Border.NO_BORDER)
             .setPadding(10);
-    contentTable.setMarginLeft(-18f);
-    contentTable.setMarginRight(-18f);
+    contentTable.setMarginLeft(MARGIN_LEFT);
+    contentTable.setMarginRight(MARGIN_LEFT);
     contentTable.addCell(contentCell);
     document.add(contentTable);
   }
@@ -110,12 +111,12 @@ public class CardComponent implements ReportComponent {
               .setTextAlignment(TextAlignment.LEFT)
               .setFontColor(hexaDecimalToRGB("030303"))
               .setFontSize(13)
-              .setMarginLeft(-17)
+              .setMarginLeft(MARGIN_LEFT)
               .setMarginTop(0)
               .setMarginBottom(0)
               .setPadding(0)
               .setFont(loadFont(inputBean.getValueFontFamily().getValue())));
-      drawDivider(document, -18, -18, 1L, "#B8B8B8");
+      drawDivider(document, MARGIN_LEFT, MARGIN_RIGHT, LINE_WIDTH_1L, "#B8B8B8");
     }
 
     addEmptyLines(1, document);
@@ -123,11 +124,11 @@ public class CardComponent implements ReportComponent {
       Table parameterTable = new Table(3);
       parameterTable.setWidth(UnitValue.createPercentValue(100));
       parameterTable.setFixedLayout();
-      parameterTable.setBorderBottom(new SolidBorder(hexaDecimalToRGB("DCDCDC"), 1f));
-      parameterTable.setBorderLeft(new SolidBorder(hexaDecimalToRGB("DCDCDC"), 1f));
-      parameterTable.setBorderRight(new SolidBorder(hexaDecimalToRGB("DCDCDC"), 1f));
-      parameterTable.setMarginLeft(-18f);
-      parameterTable.setMarginRight(-18f);
+      parameterTable.setBorderBottom(new SolidBorder(hexaDecimalToRGB(BACKGROUND_COLOR), BORDER_WIDTH));
+      parameterTable.setBorderLeft(new SolidBorder(hexaDecimalToRGB(BACKGROUND_COLOR), BORDER_WIDTH));
+      parameterTable.setBorderRight(new SolidBorder(hexaDecimalToRGB(BACKGROUND_COLOR), BORDER_WIDTH));
+      parameterTable.setMarginLeft(MARGIN_LEFT);
+      parameterTable.setMarginRight(MARGIN_RIGHT);
       parameterTable.setKeepTogether(true);
 
       Paragraph paragraph = new Paragraph();
@@ -142,7 +143,7 @@ public class CardComponent implements ReportComponent {
               .add(paragraph)
               .setBackgroundColor(hexaDecimalToRGB(inputBean.getCardBackgroundColor()))
                   .setPaddingLeft(20f)
-              .setBorder(new SolidBorder(hexaDecimalToRGB("DCDCDC"), 1));
+              .setBorder(new SolidBorder(hexaDecimalToRGB(BACKGROUND_COLOR),  BORDER_WIDTH));
       paragraphCell.setKeepTogether(true);
       parameterTable.addCell(paragraphCell);
       for (Map.Entry<String, String> entry : inputBean.getValues().entrySet()) {
@@ -176,7 +177,7 @@ public class CardComponent implements ReportComponent {
 
         cell.setKeepTogether(true);
         parameterTable.addCell(cell);
-        parameterTable.setBorder(new SolidBorder(hexaDecimalToRGB("DCDCDC"), 1f));
+        parameterTable.setBorder(new SolidBorder(hexaDecimalToRGB(BACKGROUND_COLOR), BORDER_WIDTH));
       }
       document.add(parameterTable);
     }

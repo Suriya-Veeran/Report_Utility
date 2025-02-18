@@ -1,10 +1,12 @@
 package runner.component;
 
+import static runner.constants.CommonConstants.JOB_SUMMARY;
 import static runner.utils.DataBuilderUtils.*;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
+
 import lombok.extern.slf4j.Slf4j;
 import report_utility.beans.*;
 import report_utility.core.Report;
@@ -38,7 +40,7 @@ public class TableOptimizationRunner implements CommonRunner {
 
             report.addComponent(ComponentType.GRID_SECTION, GridTableBean.builder().gridValues(buildHeaderParameters(reportNameConstants)).build());
             report.addComponent(ComponentType.GRID_SECTION, GridTableBean.builder().gridValues(buildJobSummaryParameters(reportNameConstants))
-                    .title("Job Summary")
+                    .title(JOB_SUMMARY)
                     .tableType(TableType.SUMMARY)
                     .isJobStatusInclusion(true)
                     .build());

@@ -12,6 +12,7 @@ import report_utility.core.interfaces.ReportComponent;
 
 import java.io.IOException;
 
+import static report_utility.constants.CommonConstants.*;
 import static report_utility.utils.ColorUtils.hexaDecimalToRGB;
 import static report_utility.utils.CommonUtils.drawDivider;
 import static report_utility.utils.CommonUtils.loadFont;
@@ -33,13 +34,13 @@ public class ObjectiveComponent implements ReportComponent {
                     .setTextAlignment(TextAlignment.LEFT)
                     .setFontColor(hexaDecimalToRGB("030303"))
                     .setFontSize(inputBean.getTitleFontSize())
-                    .setMarginLeft(-17)
+                    .setMarginLeft(MARGIN_LEFT)
                             .setMarginTop(0)
                     .setMarginBottom(0)
                             .setPadding(0)
                     .setFont(loadFont(inputBean.getTitleFontFamily().getValue()))
             );
-            drawDivider(document, -18, -18, 0.75f, "BCBCBC");
+            drawDivider(document, MARGIN_LEFT, MARGIN_RIGHT, LINE_WIDTH_ZERO_75F, "BCBCBC");
         }
 
         if (inputBean.getDescription() != null && !inputBean.getDescription().isEmpty()) {
@@ -47,7 +48,7 @@ public class ObjectiveComponent implements ReportComponent {
                     .setTextAlignment(TextAlignment.LEFT)
                     .setFontColor(hexaDecimalToRGB("030303"))
                     .setFontSize(inputBean.getDescriptionFontSize())
-                    .setMarginLeft(-17)
+                    .setMarginLeft(MARGIN_LEFT)
                     .setPaddingTop(0)
                     .setMarginBottom(0)
                             .setPadding(0)

@@ -14,6 +14,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import static runner.constants.CommonConstants.JOB_SUMMARY;
+
 public class Runner {
 
     public static void main(String[] args) {
@@ -53,7 +55,7 @@ public class Runner {
 
             report.addComponent(ComponentType.GRID_SECTION, GridTableBean.builder().gridValues(parameters).build());
             report.addComponent(ComponentType.GRID_SECTION, GridTableBean.builder().gridValues(jobSummaryParameters)
-                    .title("Job Summary")
+                    .title(JOB_SUMMARY)
                     .tableType(TableType.SUMMARY)
                     .isJobStatusInclusion(true)
                     .build());

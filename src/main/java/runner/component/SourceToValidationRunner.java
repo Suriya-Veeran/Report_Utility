@@ -18,6 +18,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import static report_utility.utils.chart.ChartBeanUtils.buildDataInfoBean;
+import static runner.constants.CommonConstants.JOB_SUMMARY;
 import static runner.utils.DataBuilderUtils.*;
 
 @Slf4j
@@ -38,7 +39,7 @@ public class SourceToValidationRunner implements CommonRunner {
           ComponentType.GRID_SECTION,
           GridTableBean.builder()
               .gridValues(buildJobSummaryParameters(reportNameConstants))
-              .title("Job Summary")
+              .title(JOB_SUMMARY)
               .tableType(TableType.SUMMARY)
               .isJobStatusInclusion(true)
               .build());

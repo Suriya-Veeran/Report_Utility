@@ -11,6 +11,8 @@ import report_utility.core.ReportBuilder;
 import report_utility.enums.ComponentType;
 import report_utility.enums.TableType;
 
+import static runner.constants.CommonConstants.JOB_SUMMARY;
+
 public class ConsolidatedIngestionValidationReport {
   public static void main(String[] args) {
     try {
@@ -44,7 +46,7 @@ public class ConsolidatedIngestionValidationReport {
           ComponentType.GRID_SECTION,
           GridTableBean.builder()
               .gridValues(jobSummaryParameters)
-              .title("Job Summary")
+              .title(JOB_SUMMARY)
               .tableType(TableType.SUMMARY)
               .isJobStatusInclusion(true)
               .build());

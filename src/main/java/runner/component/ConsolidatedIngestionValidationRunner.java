@@ -15,6 +15,7 @@ import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import static runner.constants.CommonConstants.JOB_SUMMARY;
 import static runner.utils.DataBuilderUtils.*;
 
 @Slf4j
@@ -32,7 +33,7 @@ public class ConsolidatedIngestionValidationRunner implements CommonRunner {
                     ComponentType.GRID_SECTION,
                     GridTableBean.builder()
                             .gridValues(buildJobSummaryParameters(reportNameConstants))
-                            .title("Job Summary")
+                            .title(JOB_SUMMARY)
                             .tableType(TableType.SUMMARY)
                             .isJobStatusInclusion(true)
                             .build());

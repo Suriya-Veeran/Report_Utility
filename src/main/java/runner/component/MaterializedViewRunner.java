@@ -1,5 +1,6 @@
 package runner.component;
 
+import static runner.constants.CommonConstants.JOB_SUMMARY;
 import static runner.utils.DataBuilderUtils.*;
 
 import java.io.FileNotFoundException;
@@ -32,7 +33,7 @@ public class MaterializedViewRunner implements CommonRunner {
 
             report.addComponent(ComponentType.GRID_SECTION, GridTableBean.builder().gridValues(buildHeaderParameters(reportNameConstants)).build());
             report.addComponent(ComponentType.GRID_SECTION, GridTableBean.builder().gridValues(buildJobSummaryParameters(reportNameConstants))
-                    .title("Job Summary")
+                    .title(JOB_SUMMARY)
                     .tableType(TableType.SUMMARY)
                     .isJobStatusInclusion(true)
                     .build());
