@@ -25,7 +25,6 @@ public class Report {
     }
 
     public void addComponent(ComponentType type, ReportBean bean) {
-//        components.add(ReportComponentFactory.createComponent(type, bean));
         ReportComponent component = ReportComponentFactory.createComponent(type, bean);
         if (component == null) {
             log.error("Component creation failed for type: {}", type);

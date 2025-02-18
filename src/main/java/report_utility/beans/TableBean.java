@@ -47,7 +47,7 @@ public class TableBean implements ReportBean {
           .headerValueFontColor("000000")
           .valueBackgroundColor("FFFFFF")
           .valueFontColor("000000")
-          .successFontColor("0072DB")
+          .successFontColor("007D2B")
           .errorFontColor("D60000")
           .build();
 }

@@ -62,13 +62,16 @@ public class Runner {
                     + "Go through them to ensure your data has been mapped without errors.";
             report.addComponent(ComponentType.OBJECTIVE, ObjectiveBean.builder().description(reportDescription).build());
 
-            report.addComponent(ComponentType.GRID_SECTION, GridTableBean.builder()
-                    .gridValues(additionalParameters)
-                    .tableType(TableType.SUMMARY)
-                    .title("Additional Details").build());
+//            report.addComponent(ComponentType.GRID_SECTION, GridTableBean.builder()
+//                    .gridValues(additionalParameters)
+//                    .tableType(TableType.SUMMARY)
+//                    .title("Additional Details").build());
 
             report.addComponent(ComponentType.TABLE, tableBean);
             report.addComponent(ComponentType.FOOTER, FooterBean.DEFAULT_CONFIG);
+
+            report.addComponent(ComponentType.CHART_SECTION, ChartCreationConfig.DEFAULT_CONFIG);
+
             report.render();
             report.close();
         } catch (FileNotFoundException e) {

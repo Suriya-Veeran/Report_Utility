@@ -6,8 +6,9 @@ import runner.services.CommonRunner;
 
 @Slf4j
 public class IngestionRunner implements CommonRunner {
-    @Override
-    public void generateReport(String location, ReportNameConstants reportNameConstants) {
+  @Override
+  public void generateReport(String location, ReportNameConstants reportNameConstants) {
 
-    }
+
+  }
 }
