@@ -97,7 +97,7 @@ public class FileUtility {
 
                 @Override
                 public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
-                    Files.deleteIfExists(dir);
+//                    Files.deleteIfExists(dir);  // delete directory
                     return FileVisitResult.CONTINUE;
                 }
             });
