@@ -9,6 +9,9 @@ import report_utility.enums.FontFamilyType;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import static report_utility.constants.ColorConstants.BLACK_FONT_COLOR;
+import static report_utility.constants.FontSizeConstants.TEN_FONT_SIZE;
+
 @Getter
 @Setter
 @SuperBuilder
@@ -29,11 +32,11 @@ public class MultipleCardBean extends CardBean {
           .headerValue("")
           .subHeaderValue("")
           .headerFontColor("2C2C2C")
-          .headerFontSize(10)
+          .headerFontSize(TEN_FONT_SIZE)
           .headerFontFamily(FontFamilyType.ROBOTO_MEDIUM)
           .valueFontFamily(FontFamilyType.ROBOTO_REGULAR)
-          .valueFontColor("000000")
-          .valueFontSize(10)
+          .valueFontColor(BLACK_FONT_COLOR)
+          .valueFontSize(TEN_FONT_SIZE)
           .cardBackgroundColor("E8EDF7")
           .build();
 }

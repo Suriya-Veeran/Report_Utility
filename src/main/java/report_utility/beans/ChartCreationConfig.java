@@ -9,6 +9,8 @@ import report_utility.enums.FontFamilyType;
 import java.util.LinkedList;
 import java.util.List;
 
+import static report_utility.constants.FontSizeConstants.THIRTEEN_FONT_SIZE;
+
 @Getter
 @Setter
 @Builder
@@ -30,7 +32,7 @@ public class ChartCreationConfig implements ReportBean {
       ChartCreationConfig.builder()
           .title("Chart")
           .titleFontFamily(FontFamilyType.ROBOTO_MEDIUM)
-          .titleFontSize(13)
+          .titleFontSize(THIRTEEN_FONT_SIZE)
           .imageWidth(400)
           .imageHeight(400)
           .chartInputBean(new LinkedList<>())

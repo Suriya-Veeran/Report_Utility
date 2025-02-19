@@ -10,6 +10,11 @@ import report_utility.enums.TableType;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import static report_utility.constants.ColorConstants.BLACK_FONT_COLOR;
+import static report_utility.constants.ColorConstants.GRAY_FONT_COLOR;
+import static report_utility.constants.FontSizeConstants.TEN_FONT_SIZE;
+import static report_utility.constants.FontSizeConstants.THIRTEEN_FONT_SIZE;
+
 @Getter
 @Setter
 @Builder
@@ -40,13 +45,13 @@ public class GridTableBean implements ReportBean {
 
     public static final GridTableBean DEFAULT_CONFIG = GridTableBean.builder()
             .title("")
-            .titleFontSize(13)
+            .titleFontSize(THIRTEEN_FONT_SIZE)
             .titleFontFamily(FontFamilyType.ROBOTO_MEDIUM)
-            .titleFontColor("030303")
+            .titleFontColor(GRAY_FONT_COLOR)
             .gridValues(new LinkedHashMap<>()) // Empty default map
             .fontFamilyType(FontFamilyType.ROBOTO_REGULAR) // Default font
-            .fontSize(10) // Default font size
-            .fontColor("#000000") // Default black color
+            .fontSize(TEN_FONT_SIZE) // Default font size
+            .fontColor(BLACK_FONT_COLOR) // Default black color
             .isJobStatusInclusion(false) // Default jobStatus Table as false
             .tableType(TableType.HEADER) // Table Type -> Header
             .jobStatusInputBean(JobStatusInputBean.DEFAULT_CONFIG) // Default job status config

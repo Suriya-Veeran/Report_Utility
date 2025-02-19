@@ -4,7 +4,6 @@ import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public class CommonConstants {
-    public static final String BACKGROUND_COLOR = "DCDCDC";
 
     public static final float BORDER_WIDTH = 1f;
 

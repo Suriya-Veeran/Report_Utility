@@ -1,5 +1,8 @@
 package report_utility.components;
 
+import static report_utility.constants.ColorConstants.DIVIDER_GRAY_COLOR;
+import static report_utility.constants.ColorConstants.GRAY_FONT_COLOR;
+import static report_utility.constants.CommonConstants.*;
 import static report_utility.utils.ColorUtils.hexaDecimalToRGB;
 import static report_utility.utils.CommonUtils.*;
 import static report_utility.utils.chart.ChartCreationConfigUtil.buildHtmlCreationInfoBean;
@@ -42,14 +45,14 @@ public class ChartComponent implements ReportComponent {
       document.add(
           new Paragraph(inputBean.getTitle())
               .setTextAlignment(TextAlignment.LEFT)
-              .setFontColor(hexaDecimalToRGB("030303"))
+              .setFontColor(hexaDecimalToRGB(GRAY_FONT_COLOR))
               .setFontSize(inputBean.getTitleFontSize())
-              .setMarginLeft(-17)
+              .setMarginLeft(MARGIN_LEFT)
               .setMarginTop(0)
               .setMarginBottom(0)
               .setPadding(0)
               .setFont(loadFont(inputBean.getTitleFontFamily().getValue())));
-      drawDivider(document, -18, -18, 1L, "#B8B8B8");
+      drawDivider(document, MARGIN_LEFT, MARGIN_RIGHT, LINE_WIDTH_1L, DIVIDER_GRAY_COLOR);
     }
 
     addEmptyLines(1, document);
@@ -57,7 +60,7 @@ public class ChartComponent implements ReportComponent {
     List<HtmlCreationInfoBean> htmlCreationInfoBeans = buildHtmlCreationInfoBean(inputBean);
 
     Table chartTable = new Table(inputBean.getChartInputBean().size());
-    chartTable.setMarginLeft(-18f);
+    chartTable.setMarginLeft(MARGIN_LEFT);
     for (HtmlCreationInfoBean htmlCreationInfoBean : htmlCreationInfoBeans) {
       File htmlFile = HtmlFileGenerator.generateHtml(htmlCreationInfoBean);
       Image chart =

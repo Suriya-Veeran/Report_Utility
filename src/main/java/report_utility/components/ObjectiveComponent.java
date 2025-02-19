@@ -12,10 +12,10 @@ import report_utility.core.interfaces.ReportComponent;
 
 import java.io.IOException;
 
+import static report_utility.constants.ColorConstants.GRAY_FONT_COLOR;
 import static report_utility.constants.CommonConstants.*;
 import static report_utility.utils.ColorUtils.hexaDecimalToRGB;
-import static report_utility.utils.CommonUtils.drawDivider;
-import static report_utility.utils.CommonUtils.loadFont;
+import static report_utility.utils.CommonUtils.*;
 
 @Builder
 @Data
@@ -29,10 +29,11 @@ public class ObjectiveComponent implements ReportComponent {
     public void render(Document document) throws IOException {
         inputBean = mergeWithDefaults(inputBean);
 
+        addEmptyLines(1, document);
         if (inputBean.getTitle() != null && !inputBean.getTitle().isEmpty()) {
             document.add(new Paragraph(inputBean.getTitle())
                     .setTextAlignment(TextAlignment.LEFT)
-                    .setFontColor(hexaDecimalToRGB("030303"))
+                    .setFontColor(hexaDecimalToRGB(GRAY_FONT_COLOR))
                     .setFontSize(inputBean.getTitleFontSize())
                     .setMarginLeft(MARGIN_LEFT)
                             .setMarginTop(0)
@@ -46,7 +47,7 @@ public class ObjectiveComponent implements ReportComponent {
         if (inputBean.getDescription() != null && !inputBean.getDescription().isEmpty()) {
             document.add(new Paragraph(inputBean.getDescription())
                     .setTextAlignment(TextAlignment.LEFT)
-                    .setFontColor(hexaDecimalToRGB("030303"))
+                    .setFontColor(hexaDecimalToRGB(GRAY_FONT_COLOR))
                     .setFontSize(inputBean.getDescriptionFontSize())
                     .setMarginLeft(MARGIN_LEFT)
                     .setPaddingTop(0)

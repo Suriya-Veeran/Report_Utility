@@ -28,7 +28,7 @@ public class TableOptimizationRunner implements CommonRunner {
             TableBean tableBean = TableBean.builder()
                     .title("Optimization Statistics")
                     .headers(List.of("Description", "Count of pre-data optimization",
-                            "Count of pre-data optimization", "Message"))
+                            "Count of post-data optimization", "Message"))
                     .values(List.of(
                             List.of("Data Snapshots", "2", "1", "1 snapshot removed"),
                             List.of("Data files", "8", "1", "8 files merged as 1"),

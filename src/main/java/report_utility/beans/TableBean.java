@@ -9,6 +9,9 @@ import report_utility.enums.FontFamilyType;
 import java.util.ArrayList;
 import java.util.List;
 
+import static report_utility.constants.ColorConstants.*;
+import static report_utility.constants.FontSizeConstants.TEN_FONT_SIZE;
+
 @Getter
 @Setter
 @Builder
@@ -40,13 +43,13 @@ public class TableBean implements ReportBean {
       TableBean.builder()
           .title("")
           .fontFamily(FontFamilyType.ROBOTO_REGULAR)
-          .fontSize(10)
+          .fontSize(TEN_FONT_SIZE)
           .headers(new ArrayList<>())
           .values(new ArrayList<>())
-          .headerBackgroundColor("DFEAFF")
-          .headerValueFontColor("000000")
-          .valueBackgroundColor("FFFFFF")
-          .valueFontColor("000000")
+          .headerBackgroundColor(LIGHT_BLUE_FONT_COLOR)
+          .headerValueFontColor(BLACK_FONT_COLOR)
+          .valueBackgroundColor(WHITE_FONT_COLOR)
+          .valueFontColor(BLACK_FONT_COLOR)
           .successFontColor("007D2B")
           .errorFontColor("D60000")
           .build();

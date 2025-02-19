@@ -26,6 +26,7 @@
     import java.util.LinkedHashMap;
     import java.util.Map;
 
+    import static report_utility.constants.ColorConstants.*;
     import static report_utility.constants.CommonConstants.*;
     import static report_utility.utils.ColorUtils.hexaDecimalToRGB;
     import static report_utility.utils.CommonUtils.*;
@@ -77,7 +78,7 @@
                                      GridTableBean inputBean) throws IOException {
             String backgroundColor = inputBean.getTableType() == TableType.HEADER
                     ? "F9F9F9"
-                    : "FFFFFF";
+                    : WHITE_FONT_COLOR;
             Table table = new Table(UnitValue.createPercentArray(new float[]{450L, 450L, 450L}));
             table.setMarginLeft(-36);
             table.setWidth(PageSize.A4.getWidth());
@@ -104,7 +105,7 @@
 
             String backgroundColor = inputBean.getTableType() == TableType.HEADER
                     ? "F9F9F9"
-                    : "FFFFFF";
+                    : WHITE_FONT_COLOR;
 
             float valueFontSize = inputBean.getFontSize();
             float headerFontSize = inputBean.getFontSize() - 1;
@@ -171,7 +172,7 @@
                             + inputBean.getJobStatusInputBean().getJobStatus().getStatus()))
                             .setFont(loadFont(jobStatusInputBean.getFontFamily().getValue()))
                             .setFontSize(inputBean.getJobStatusInputBean().getFontSize())
-                            .setFontColor(hexaDecimalToRGB("FFFFFF"))
+                            .setFontColor(hexaDecimalToRGB(WHITE_FONT_COLOR))
                             .setTextAlignment(TextAlignment.LEFT)
                             .setMarginLeft(4f));
             jobStatusCell.setWidth(UnitValue.createPercentValue(100));

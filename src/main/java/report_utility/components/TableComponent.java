@@ -9,17 +9,20 @@ import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.properties.TextAlignment;
 import com.itextpdf.layout.properties.UnitValue;
+import com.itextpdf.layout.properties.VerticalAlignment;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import report_utility.beans.TableBean;
 import report_utility.core.interfaces.ReportComponent;
+import report_utility.enums.FontFamilyType;
 import report_utility.utils.RoundedTableRenderer;
 
 import java.io.IOException;
 import java.util.List;
 
+import static report_utility.constants.ColorConstants.*;
 import static report_utility.constants.CommonConstants.*;
 import static report_utility.utils.ColorUtils.hexaDecimalToRGB;
 import static report_utility.utils.CommonUtils.*;
@@ -37,21 +40,22 @@ public class TableComponent implements ReportComponent {
 
     inputBean = mergeWithDefaults(inputBean);
 
+    addEmptyLines(1, document);
     if (inputBean.getTitle() != null && !inputBean.getTitle().isEmpty()) {
       document.add(
           new Paragraph(inputBean.getTitle())
               .setTextAlignment(TextAlignment.LEFT)
-              .setFontColor(hexaDecimalToRGB("030303"))
+              .setFontColor(hexaDecimalToRGB(GRAY_FONT_COLOR))
               .setFontSize(13)
-              .setMarginLeft(-17)
+              .setMarginLeft(MARGIN_LEFT)
               .setMarginTop(0)
               .setMarginBottom(0)
               .setPadding(0)
-              .setFont(loadFont(inputBean.getFontFamily().getValue())));
-      drawDivider(document, MARGIN_LEFT, MARGIN_RIGHT, LINE_WIDTH_1L, "#B8B8B8");
+              .setFont(loadFont(FontFamilyType.ROBOTO_MEDIUM.getValue())));
+      drawDivider(document, MARGIN_LEFT, MARGIN_RIGHT, LINE_WIDTH_1L, DIVIDER_GRAY_COLOR);
     }
 
-    addEmptyLines(1, document);
+    addEmptyLines(2, document);
     if (inputBean.getHeaders() != null && !inputBean.getHeaders().isEmpty()) {
       Table table = new Table(inputBean.getHeaders().size());
       table.setWidth(UnitValue.createPercentValue(100));
@@ -62,17 +66,18 @@ public class TableComponent implements ReportComponent {
 
       float borderRadius = 2f;
       float borderWidth = 1f;
-      Color borderColor = hexaDecimalToRGB("DCDCDC");
+      Color borderColor = hexaDecimalToRGB(BACKGROUND_COLOR);
 
       for (String header : inputBean.getHeaders()) {
 
         Paragraph paragraph = new Paragraph();
-        paragraph.setFont(loadFont(inputBean.getFontFamily().getValue()));
+        paragraph.setVerticalAlignment(VerticalAlignment.MIDDLE);
+        paragraph.setFont(loadFont(FontFamilyType.ROBOTO_MEDIUM.getValue()));
 
         String[] parts = header.split(",", 2);
         paragraph
             .add(new Paragraph(parts[0]).setFixedLeading(15f))
-            .setFontSize(inputBean.getFontSize());
+            .setFontSize(inputBean.getFontSize() - 2);
 
         if (parts.length > 1) {
           paragraph
@@ -80,7 +85,7 @@ public class TableComponent implements ReportComponent {
               .add(
                   new Paragraph(parts[1].trim())
                       .setPaddingTop(-25f)
-                      .setFontSize(inputBean.getFontSize()));
+                      .setFontSize(inputBean.getFontSize() - 3));
         }
 
         Cell headerCell =
@@ -89,10 +94,14 @@ public class TableComponent implements ReportComponent {
                 .setBorder(Border.NO_BORDER)
                 .setTextAlignment(TextAlignment.LEFT)
                 .setFontSize(inputBean.getFontSize())
+                    .setBorderTop(new SolidBorder(borderColor, 0.5f))
                 .setBorderBottom(new SolidBorder(borderColor, borderWidth))
-                .setBackgroundColor(hexaDecimalToRGB("DFEAFF"))
+                .setBackgroundColor(hexaDecimalToRGB("E8EDF7"))
+                    .setVerticalAlignment(VerticalAlignment.MIDDLE)
                 .setPaddingTop(2f)
-                .setPaddingLeft(12f);
+                .setPaddingLeft(15f)
+                ;
+        table.setFixedLayout();
         table.addCell(headerCell);
       }
 
@@ -104,7 +113,10 @@ public class TableComponent implements ReportComponent {
           Paragraph paragraph = new Paragraph();
           String[] parts = originalValue.split(",", 2);
           paragraph.add(
-              new Paragraph(parts[0]).setFontSize(inputBean.getFontSize()).setFontColor(fontColor));
+              new Paragraph(parts[0])
+                      .setFixedLeading(15f)
+                      .setFontSize(inputBean.getFontSize() - 1)
+          );
 
           if (parts.length > 1) {
             paragraph
@@ -118,19 +130,20 @@ public class TableComponent implements ReportComponent {
           Cell cell =
               new Cell()
                   .add(paragraph)
-                  .setFont(loadFont(inputBean.getFontFamily().getValue()))
+                  .setFont(loadFont(FontFamilyType.HELVETICA.getValue()))
                   .setBorderTop(Border.NO_BORDER)
                   .setBorderLeft(Border.NO_BORDER)
                   .setBorderRight(Border.NO_BORDER)
                   .setFontColor(fontColor)
-                  .setPadding(12f);
+                      .setFontSize(inputBean.getFontSize())
+                      .setPadding(0)
+                  .setPaddingLeft(15f);
 
           if (i == rowCount - 1) {
             cell.setBorderBottom(Border.NO_BORDER);
           } else {
-            cell.setBorderBottom(new SolidBorder(hexaDecimalToRGB("DCDCDC"), 1));
+            cell.setBorderBottom(new SolidBorder(hexaDecimalToRGB(BACKGROUND_COLOR), BORDER_WIDTH));
           }
-
           table.addCell(cell);
         }
       }
@@ -140,8 +153,8 @@ public class TableComponent implements ReportComponent {
               borderRadius,
               borderColor,
               borderWidth,
-              hexaDecimalToRGB("FFFFFF"),
-              hexaDecimalToRGB("DFEAFF")));
+              hexaDecimalToRGB(WHITE_FONT_COLOR),
+              hexaDecimalToRGB(LIGHT_BLUE_FONT_COLOR)));
       document.add(table);
       addEmptyLines(1, document);
     }
@@ -207,7 +220,7 @@ public class TableComponent implements ReportComponent {
     } else if (value.equalsIgnoreCase("Disposed Failure") || value.equalsIgnoreCase("Failed")) {
       fontColor = hexaDecimalToRGB(inputBean.getErrorFontColor());
     } else {
-      fontColor = hexaDecimalToRGB("000000");
+      fontColor = hexaDecimalToRGB(BLACK_FONT_COLOR);
     }
 
     return fontColor;

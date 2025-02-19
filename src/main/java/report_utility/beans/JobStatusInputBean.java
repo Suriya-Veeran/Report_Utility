@@ -6,6 +6,8 @@ import lombok.Setter;
 import report_utility.enums.FontFamilyType;
 import report_utility.enums.JobStatusEnum;
 
+import static report_utility.constants.FontSizeConstants.EIGHT_FONT_SIZE;
+
 @Getter
 @Setter
 @Builder
@@ -23,7 +25,7 @@ public class JobStatusInputBean {
     public static final JobStatusInputBean DEFAULT_CONFIG = JobStatusInputBean.builder()
             .jobStatus(JobStatusEnum.SUCCESS) // Default status: SUCCESS
             .errorMessage("") // No default error message
-            .fontSize(8) // Default font size
+            .fontSize(EIGHT_FONT_SIZE) // Default font size
             .fontFamily(FontFamilyType.ROBOTO_ITALIC) // font Family
             .build();
 

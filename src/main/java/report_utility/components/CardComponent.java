@@ -1,6 +1,8 @@
 package report_utility.components;
 
+import static report_utility.constants.ColorConstants.*;
 import static report_utility.constants.CommonConstants.*;
+import static report_utility.constants.FontSizeConstants.*;
 import static report_utility.utils.ColorUtils.hexaDecimalToRGB;
 import static report_utility.utils.CommonUtils.*;
 
@@ -63,7 +65,7 @@ public class CardComponent implements ReportComponent {
                     .setFontColor(hexaDecimalToRGB(inputBean.getHeaderFontColor()))
                     .setFontSize(inputBean.getHeaderFontSize()))
             .setBorder(Border.NO_BORDER)
-            .setPadding(10)
+            .setPadding(PADDING_TEN_FONT_SIZE)
             .setTextAlignment(TextAlignment.LEFT));
 
     headerTable.addCell(
@@ -74,7 +76,7 @@ public class CardComponent implements ReportComponent {
                     .setFontColor(hexaDecimalToRGB(inputBean.getHeaderFontColor()))
                     .setFontSize(inputBean.getHeaderFontSize()))
             .setBorder(Border.NO_BORDER)
-            .setPadding(10)
+            .setPadding(PADDING_TEN_FONT_SIZE)
             .setTextAlignment(TextAlignment.RIGHT));
     headerTable.setMarginLeft(MARGIN_LEFT);
     headerTable.setMarginRight(MARGIN_LEFT);
@@ -94,7 +96,7 @@ public class CardComponent implements ReportComponent {
                     .setFontSize(inputBean.getValueFontSize())
                     .setFontColor(hexaDecimalToRGB(inputBean.getValueFontColor())))
             .setBorder(Border.NO_BORDER)
-            .setPadding(10);
+            .setPadding(PADDING_TEN_FONT_SIZE);
     contentTable.setMarginLeft(MARGIN_LEFT);
     contentTable.setMarginRight(MARGIN_LEFT);
     contentTable.addCell(contentCell);
@@ -109,14 +111,14 @@ public class CardComponent implements ReportComponent {
       document.add(
           new Paragraph(inputBean.getTitle())
               .setTextAlignment(TextAlignment.LEFT)
-              .setFontColor(hexaDecimalToRGB("030303"))
-              .setFontSize(13)
+              .setFontColor(hexaDecimalToRGB(GRAY_FONT_COLOR))
+              .setFontSize(THIRTEEN_FONT_SIZE)
               .setMarginLeft(MARGIN_LEFT)
               .setMarginTop(0)
               .setMarginBottom(0)
               .setPadding(0)
               .setFont(loadFont(inputBean.getValueFontFamily().getValue())));
-      drawDivider(document, MARGIN_LEFT, MARGIN_RIGHT, LINE_WIDTH_1L, "#B8B8B8");
+      drawDivider(document, MARGIN_LEFT, MARGIN_RIGHT, LINE_WIDTH_1L, DIVIDER_GRAY_COLOR);
     }
 
     addEmptyLines(1, document);
@@ -142,7 +144,7 @@ public class CardComponent implements ReportComponent {
           new Cell(1, 3)
               .add(paragraph)
               .setBackgroundColor(hexaDecimalToRGB(inputBean.getCardBackgroundColor()))
-                  .setPaddingLeft(20f)
+                  .setPaddingLeft(PADDING_TWENTY_FONT_SIZE)
               .setBorder(new SolidBorder(hexaDecimalToRGB(BACKGROUND_COLOR),  BORDER_WIDTH));
       paragraphCell.setKeepTogether(true);
       parameterTable.addCell(paragraphCell);
@@ -161,16 +163,16 @@ public class CardComponent implements ReportComponent {
                     new Paragraph(new Text(header))
                         .setFont(loadFont(inputBean.getValueFontFamily().getValue()))
                         .setFontColor(hexaDecimalToRGB(inputBean.getHeaderFontColor()))
-                        .setPaddingLeft(12f)
+                        .setPaddingLeft(PADDING_TWELVE_FONT_SIZE)
                         .setFontSize(inputBean.getHeaderFontSize()))
                 .add(
                     new Paragraph(new Text(value))
                         .setFont(loadFont(inputBean.getHeaderFontFamily().getValue()))
                         .setFontColor(valueFinalColor)
                             .setMarginTop(-5f)
-                        .setPaddingLeft(12f)
+                        .setPaddingLeft(PADDING_TWELVE_FONT_SIZE)
                         .setFontSize(inputBean.getValueFontSize()))
-                .setBackgroundColor(hexaDecimalToRGB("FFFFFF"))
+                .setBackgroundColor(hexaDecimalToRGB(WHITE_FONT_COLOR))
                 .setBorder(Border.NO_BORDER)
                 .setTextAlignment(TextAlignment.LEFT)
                 .setVerticalAlignment(VerticalAlignment.TOP);
