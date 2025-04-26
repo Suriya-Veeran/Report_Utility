@@ -18,6 +18,8 @@ import java.util.Objects;
 public class Report {
     @Getter
     private final Document document;
+    @Getter
+    private static boolean isChartAdded=false;//This Line Added For Space Adjustment In SecondPage
     private final List<ReportComponent> components = new LinkedList<>();
 
     public Report(Document document) {
@@ -31,6 +33,7 @@ public class Report {
         } else {
             log.info("Component added: {}", component.getClass().getSimpleName());
             components.add(component);
+              if(component.getClass().getSimpleName().equalsIgnoreCase("ChartComponent")){isChartAdded=true;}//This Line Added For Space Adjustment In SecondPage
         }
     }
 

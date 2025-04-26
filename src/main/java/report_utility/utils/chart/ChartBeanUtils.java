@@ -14,7 +14,7 @@ public class ChartBeanUtils {
   }
 
   public static LegendInfoBean createLegendInfoBean(List<String> data) {
-    return LegendInfoBean.builder().data(data).build();
+    return LegendInfoBean.builder().data(data).textStyle(TextStyleBean.builder().fontSize(15).fontWeight("bold").build()).build();
   }
 
   public static DataInfoBean buildDataInfoBean(

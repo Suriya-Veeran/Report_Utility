@@ -6,6 +6,7 @@ import report_utility.core.Report;
 import report_utility.core.ReportBuilder;
 import report_utility.enums.ComponentType;
 import report_utility.enums.FontFamilyType;
+import report_utility.enums.JobStatusEnum;
 import report_utility.enums.TableType;
 import runner.enums.ReportNameConstants;
 import runner.services.CommonRunner;
@@ -14,6 +15,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
+import static report_utility.constants.FontSizeConstants.EIGHT_FONT_SIZE;
 import static runner.constants.CommonConstants.JOB_SUMMARY;
 import static runner.utils.DataBuilderUtils.*;
 
@@ -41,25 +43,37 @@ public class RollbackRunner implements CommonRunner {
               .values(
                   List.of(
                       List.of(
-                          "Proc Code, CLAIM_SYS_PROC_CODE",
+                          "PROC_CODE, CLAIM_SYS_PROC_CODE",
                           "100, Content: 0",
                           "0, Content: 0",
                           "00:03:09.482",
                           "Success"),
                       List.of(
-                          "Dx Code, CLAIM_SYS_DX_CODE",
+                          "DX_CODE, CLAIM_SYS_DX_CODE",
                           "100, Content: 10",
                           "0, Content: 0",
                           "00:04:09.482",
-                          "Failure"),
+                          "Failed"),
                       List.of(
-                          "Subscriber, CLAIM_SYS_SUBSCRIBER",
-                          "100, Content: 0",
-                          "1, Content: 1",
+                          "SUBSCRIBERS, CLAIM_SYS_SUBSCRIBER",
+                          "0, Content: 0",
+                          "0, Content: 0",
                           "00:03:09.482",
-                          "Success")))
+                          "Success"),
+                          List.of(
+                                  "ADDRESS, CLAIM_SYS_ADDRESS",
+                                  "0, Content: 10",
+                                  "0, Content: 0",
+                                  "00:04:09.482",
+                                  "Failed"),
+                          List.of(
+                                  "PROVIDER, CLAIM_SYS_PROVIDER",
+                                  "100, Content: 0",
+                                  "0, Content: 0",
+                                  "00:03:09.482",
+                                  "Success")))
               .fontFamily(FontFamilyType.ROBOTO_REGULAR)
-              .fontSize(12)
+              .fontSize(11.5f)
               .build();
 
       report.addComponent(
@@ -72,6 +86,13 @@ public class RollbackRunner implements CommonRunner {
               .title(JOB_SUMMARY)
               .tableType(TableType.SUMMARY)
               .isJobStatusInclusion(true)
+                  .jobStatusInputBean(JobStatusInputBean.builder()
+                          .jobStatus(JobStatusEnum.FAILURE)
+                          .errorMessage("Some Tables Failed To Rollback")
+                          .jobStatusFontFamily(FontFamilyType.ROBOTO_BOLD_ITALIC)
+                          .errorMessageFontFamily(FontFamilyType.ROBOTO_MEDIUM)
+                          .fontSize(EIGHT_FONT_SIZE)
+                          .build())
               .build());
       report.addComponent(
           ComponentType.OBJECTIVE,

@@ -1,6 +1,7 @@
 package report_utility.core;
 
 import lombok.extern.slf4j.Slf4j;
+import report_utility.beans.TableBeanForPurge;
 import report_utility.beans.*;
 import report_utility.components.*;
 import report_utility.core.factory.ReportComponentFactory;
@@ -45,6 +46,11 @@ public class ReportBuilder extends AbstractReport {
                 .inputBean(bean).build();
     }
 
+    public static ReportComponent addComponent(CocCardBean bean) {
+        return CocCardComponent.builder()
+                .inputBean(bean).build();
+    }
+
     public static ReportComponent addComponent(ObjectiveBean bean) {
         return ObjectiveComponent.builder()
                 .inputBean(bean).build();
@@ -62,6 +68,16 @@ public class ReportBuilder extends AbstractReport {
 
     public static ReportComponent addComponent(TableBean bean) {
         return TableComponent.builder()
+                .inputBean(bean).build();
+    }
+
+    public static ReportComponent addComponent(TableBeanForPurge bean){
+        return TableComponentForPurge.builder()
+                .inputBean(bean).build();
+    }
+
+    public static ReportComponent addComponent(TitleBean bean){
+        return TitleComponent.builder()
                 .inputBean(bean).build();
     }
 

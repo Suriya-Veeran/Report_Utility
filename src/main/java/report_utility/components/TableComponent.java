@@ -1,12 +1,12 @@
 package report_utility.components;
 
 import com.itextpdf.kernel.colors.Color;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.canvas.draw.SolidLine;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.borders.Border;
 import com.itextpdf.layout.borders.SolidBorder;
-import com.itextpdf.layout.element.Cell;
-import com.itextpdf.layout.element.Paragraph;
-import com.itextpdf.layout.element.Table;
+import com.itextpdf.layout.element.*;
 import com.itextpdf.layout.properties.TextAlignment;
 import com.itextpdf.layout.properties.UnitValue;
 import com.itextpdf.layout.properties.VerticalAlignment;
@@ -14,7 +14,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.eclipse.jetty.client.util.DeferredContentProvider;
 import report_utility.beans.TableBean;
+import report_utility.constants.ColorConstants;
+import report_utility.core.Report;
 import report_utility.core.interfaces.ReportComponent;
 import report_utility.enums.FontFamilyType;
 import report_utility.utils.RoundedTableRenderer;
@@ -41,29 +44,43 @@ public class TableComponent implements ReportComponent {
     inputBean = mergeWithDefaults(inputBean);
 
     addEmptyLines(1, document);
+
+    float topMargin= Report.isChartAdded()?12f:0f;//This Line Added For Space Adjustment In SecondPage
+
     if (inputBean.getTitle() != null && !inputBean.getTitle().isEmpty()) {
+
       document.add(
           new Paragraph(inputBean.getTitle())
               .setTextAlignment(TextAlignment.LEFT)
               .setFontColor(hexaDecimalToRGB(GRAY_FONT_COLOR))
               .setFontSize(13)
               .setMarginLeft(MARGIN_LEFT)
-              .setMarginTop(0)
+              .setMarginTop(topMargin)
               .setMarginBottom(0)
               .setPadding(0)
               .setFont(loadFont(FontFamilyType.ROBOTO_MEDIUM.getValue())));
-      drawDivider(document, MARGIN_LEFT, MARGIN_RIGHT, LINE_WIDTH_1L, DIVIDER_GRAY_COLOR);
+
+
+      if(inputBean.getDrawDividerNeed().equalsIgnoreCase("true")) {
+        drawDivider(document, MARGIN_LEFT, MARGIN_RIGHT, LINE_WIDTH_1L, DIVIDER_GRAY_COLOR);
+      }
     }
 
-    addEmptyLines(2, document);
+    if(inputBean.getEmptyLineNeed().equalsIgnoreCase("true") ) {
+      addEmptyLines(2, document);
+    }
+   else{
+      document.add(new LineSeparator(new SolidLine(0)).setMarginBottom(3).setOpacity(0f));
+    }
+
     if (inputBean.getHeaders() != null && !inputBean.getHeaders().isEmpty()) {
       Table table = new Table(inputBean.getHeaders().size());
       table.setWidth(UnitValue.createPercentValue(100));
       table.setKeepTogether(false);
       table.setMarginLeft(MARGIN_LEFT);
       table.setMarginRight(MARGIN_RIGHT);
+      table.setMarginTop(-2.2f);
       table.setPadding(0);
-
       float borderRadius = 2f;
       float borderWidth = 1f;
       Color borderColor = hexaDecimalToRGB(BACKGROUND_COLOR);
@@ -72,11 +89,12 @@ public class TableComponent implements ReportComponent {
 
         Paragraph paragraph = new Paragraph();
         paragraph.setVerticalAlignment(VerticalAlignment.MIDDLE);
+        paragraph.setMultipliedLeading(0.8f);//added for space between lines in header handling
         paragraph.setFont(loadFont(FontFamilyType.ROBOTO_MEDIUM.getValue()));
 
         String[] parts = header.split(",", 2);
         paragraph
-            .add(new Paragraph(parts[0]).setFixedLeading(15f))
+                .add(new Paragraph(parts[0]))
             .setFontSize(inputBean.getFontSize() - 2);
 
         if (parts.length > 1) {
@@ -98,7 +116,8 @@ public class TableComponent implements ReportComponent {
                 .setBorderBottom(new SolidBorder(borderColor, borderWidth))
                 .setBackgroundColor(hexaDecimalToRGB("E8EDF7"))
                     .setVerticalAlignment(VerticalAlignment.MIDDLE)
-                .setPaddingTop(2f)
+                .setPaddingTop(3f)
+                    .setPaddingBottom(6f)
                 .setPaddingLeft(15f)
                 ;
         table.setFixedLayout();
@@ -108,24 +127,47 @@ public class TableComponent implements ReportComponent {
       int rowCount = inputBean.getValues().size();
       for (int i = 0; i < rowCount; i++) {
         List<String> rowValues = inputBean.getValues().get(i);
+        int j=0;
         for (String originalValue : rowValues) {
+
           Color fontColor = retrieveCellFontColor(originalValue, inputBean);
           Paragraph paragraph = new Paragraph();
-          String[] parts = originalValue.split(",", 2);
+          String[] parts = originalValue.split(",", 3);
+//          paragraph.add(
+//              new Paragraph(parts[0])
+//                      .setFixedLeading(1f)
+//                      .setMultipliedLeading(1.2f)//this line added for purge,check with table optimization as well
+//                      .setFontSize(inputBean.getFontSize() - 2)
+//          );
+//
+//          if (parts.length > 1) {
+//            paragraph
+//                .add("\n")
+//                .add(
+//                    new Paragraph(parts[1].trim())
+//                        .setPaddingTop(-10)
+//                        .setFontSize(inputBean.getFontSize() - 5.5f));
+//          }
+
+
           paragraph.add(
-              new Paragraph(parts[0])
-                      .setFixedLeading(15f)
-                      .setFontSize(inputBean.getFontSize() - 1)
+                  new Text(parts[0])
+                          .setFontSize(inputBean.getFontSize() - 2)
           );
+
+          float fontSize= (j==0)? (inputBean.getFontSize()-5.5f): (inputBean.getFontSize()-2f);
+          j++;
 
           if (parts.length > 1) {
             paragraph
-                .add("\n")
-                .add(
-                    new Paragraph(parts[1].trim())
-                        .setPaddingTop(-10)
-                        .setFontSize(inputBean.getFontSize() - 3f));
+                    .add("\n")
+                    .add(
+                            new Text(parts[1].trim())
+                                    .setFontSize(fontSize));
           }
+         paragraph.setFixedLeading(1f);
+          paragraph.setMultipliedLeading(1.5f);
+
 
           Cell cell =
               new Cell()
@@ -136,7 +178,7 @@ public class TableComponent implements ReportComponent {
                   .setBorderRight(Border.NO_BORDER)
                   .setFontColor(fontColor)
                       .setFontSize(inputBean.getFontSize())
-                      .setPadding(0)
+                      .setPadding(10)
                   .setPaddingLeft(15f);
 
           if (i == rowCount - 1) {
@@ -145,6 +187,7 @@ public class TableComponent implements ReportComponent {
             cell.setBorderBottom(new SolidBorder(hexaDecimalToRGB(BACKGROUND_COLOR), BORDER_WIDTH));
           }
           table.addCell(cell);
+
         }
       }
       table.setNextRenderer(
@@ -157,6 +200,7 @@ public class TableComponent implements ReportComponent {
               hexaDecimalToRGB(LIGHT_BLUE_FONT_COLOR)));
       document.add(table);
       addEmptyLines(1, document);
+
     }
   }
 
@@ -210,6 +254,14 @@ public class TableComponent implements ReportComponent {
             tableBean.getErrorFontColor() != null
                 ? tableBean.getErrorFontColor()
                 : TableBean.DEFAULT_CONFIG.getErrorFontColor())
+            .drawDividerNeed(
+                    tableBean.getDrawDividerNeed() !=null
+                    ? tableBean.getDrawDividerNeed()
+                    : TableBean.DEFAULT_CONFIG.getDrawDividerNeed())
+            .emptyLineNeed(
+                    tableBean.getEmptyLineNeed() !=null
+                            ? tableBean.getEmptyLineNeed()
+                            : TableBean.DEFAULT_CONFIG.getEmptyLineNeed())
         .build();
   }
 
@@ -217,7 +269,7 @@ public class TableComponent implements ReportComponent {
     Color fontColor;
     if (value.equalsIgnoreCase("Disposed Success") || value.equalsIgnoreCase("Success")) {
       fontColor = hexaDecimalToRGB(inputBean.getSuccessFontColor());
-    } else if (value.equalsIgnoreCase("Disposed Failure") || value.equalsIgnoreCase("Failed")) {
+    } else if (value.equalsIgnoreCase("Disposed with error") || value.equalsIgnoreCase("Failed")) {
       fontColor = hexaDecimalToRGB(inputBean.getErrorFontColor());
     } else {
       fontColor = hexaDecimalToRGB(BLACK_FONT_COLOR);

@@ -1,5 +1,7 @@
 package runner.component;
 
+import static report_utility.constants.FontSizeConstants.EIGHT_FONT_SIZE;
+import static report_utility.constants.FontSizeConstants.ELEVEN_FONT_SIZE;
 import static runner.constants.CommonConstants.JOB_SUMMARY;
 import static runner.utils.DataBuilderUtils.*;
 
@@ -8,13 +10,13 @@ import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
-import report_utility.beans.FooterBean;
-import report_utility.beans.GridTableBean;
-import report_utility.beans.HeaderBean;
-import report_utility.beans.ObjectiveBean;
+import report_utility.beans.*;
+import report_utility.constants.FontSizeConstants;
 import report_utility.core.Report;
 import report_utility.core.ReportBuilder;
 import report_utility.enums.ComponentType;
+import report_utility.enums.FontFamilyType;
+import report_utility.enums.JobStatusEnum;
 import report_utility.enums.TableType;
 import runner.enums.ReportNameConstants;
 import runner.services.CommonRunner;
@@ -35,7 +37,16 @@ public class MaterializedViewRunner implements CommonRunner {
             report.addComponent(ComponentType.GRID_SECTION, GridTableBean.builder().gridValues(buildJobSummaryParameters(reportNameConstants))
                     .title(JOB_SUMMARY)
                     .tableType(TableType.SUMMARY)
+//                    .fontFamilyType(FontFamilyType.ROBOTO_REGULAR)//added
+//                    .fontSize(ELEVEN_FONT_SIZE)//added
                     .isJobStatusInclusion(true)
+//                            .jobStatusInputBean(JobStatusInputBean.builder()
+//                                    .jobStatus(JobStatusEnum.FAILURE)
+//                                    .errorMessage("Schema ad_test_dbo2 is not found")
+//                                    .jobStatusFontFamily(FontFamilyType.ROBOTO_BOLD_ITALIC)
+//                                    .errorMessageFontFamily(FontFamilyType.ROBOTO_MEDIUM)
+//                                    .fontSize(EIGHT_FONT_SIZE)
+//                                    .build())
                     .build());
 
             report.addComponent(ComponentType.OBJECTIVE, ObjectiveBean.builder().description(buildObjectiveDescription(reportNameConstants)).build());

@@ -37,5 +37,5 @@ public class ChartCreationConfigUtil {
       htmlCreationInfoBeans.add(htmlCreationInfoBean);
     }
     return htmlCreationInfoBeans;
-  }
+  } 
 }

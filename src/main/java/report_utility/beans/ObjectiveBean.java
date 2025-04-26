@@ -6,8 +6,7 @@ import lombok.Setter;
 import report_utility.core.interfaces.ReportBean;
 import report_utility.enums.FontFamilyType;
 
-import static report_utility.constants.FontSizeConstants.TEN_FONT_SIZE;
-import static report_utility.constants.FontSizeConstants.THIRTEEN_FONT_SIZE;
+import static report_utility.constants.FontSizeConstants.*;
 
 @Getter
 @Setter
@@ -30,7 +29,7 @@ public class ObjectiveBean implements ReportBean {
             ObjectiveBean.builder()
                     .title("Objective")
                     .description("Description")
-                    .titleFontFamily(FontFamilyType.ROBOTO_MEDIUM)
+                    .titleFontFamily(FontFamilyType.ROBOTO_BOLD)
                     .descriptionFontFamily(FontFamilyType.ROBOTO_REGULAR)
                     .titleFontSize(THIRTEEN_FONT_SIZE)
                     .descriptionFontSize(TEN_FONT_SIZE)

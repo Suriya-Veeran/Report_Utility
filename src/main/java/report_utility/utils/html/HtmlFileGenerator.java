@@ -116,9 +116,9 @@ public class HtmlFileGenerator {
                 .append("    var chart = echarts.init(document.getElementById('chart'));\n\n")
                 .append("    function formatValue(value) {\n")
                 .append("        if (value >= 1024 * 1024) {\n")
-                .append("            return (value / (1024 * 1024)).toFixed(2) + ' GB';\n")
+                .append("            return (value / (1024 * 1024)).toFixed(0) + ' GB';\n")
                 .append("        } else if (value >= 1024) {\n")
-                .append("            return (value / 1024).toFixed(2) + ' MB';\n")
+                .append("            return (value / 1024).toFixed(0) + ' MB';\n")
                 .append("        }\n")
                 .append("        return value + ' KB';\n")
                 .append("    }\n\n")
@@ -182,7 +182,17 @@ public class HtmlFileGenerator {
             }
         }
 
-        jsContent.append("]\n").append(NEXT_LINE_WITH_MIN_SPACE);
+
+        jsContent.append("],\n")
+                .append("          textStyle: {\n")
+                .append("             fontSize: ")
+                .append(legendInfoBean.getTextStyle().getFontSize())
+                .append(",\n")
+                .append("            fontWeight: '")
+                .append(legendInfoBean.getTextStyle().getFontWeight())
+                .append("'\n                       }")
+                .append(",\n")
+                .append(NEXT_LINE_WITH_MIN_SPACE);
 
         if (chartType.equalsIgnoreCase("pie")) {
             jsContent.append(generatePieChart(seriesInfoBean, false)); // Regular pie chart
@@ -308,7 +318,7 @@ public class HtmlFileGenerator {
         if (isDoughnut) {
             pieChartData.append("            radius: ['30%', '55%'],\n"); // Inner radius and outer radius
         } else {
-            pieChartData.append("            radius: '50%',\n"); // Regular pie chart
+            pieChartData.append("            radius: '70%',\n"); // Regular pie chart
         }
 
         pieChartData.append("            data: [\n");
@@ -342,7 +352,10 @@ public class HtmlFileGenerator {
                 .append("                },\n")
                 .append(FONT_SIZE)
                 .append(seriesInfoBean.getLabel().getFontSize())
-                .append("\n")
+                .append(",\n")
+                .append("                fontWeight: '")
+                .append(seriesInfoBean.getLabel().getFontWeight())
+                .append("'\n")
                 .append(NEXT_LINE_WITH_SPACE)
                 .append("        }]\n");
 

@@ -46,10 +46,10 @@ public class GridTableBean implements ReportBean {
     public static final GridTableBean DEFAULT_CONFIG = GridTableBean.builder()
             .title("")
             .titleFontSize(THIRTEEN_FONT_SIZE)
-            .titleFontFamily(FontFamilyType.ROBOTO_MEDIUM)
+            .titleFontFamily(FontFamilyType.ROBOTO_BOLD)
             .titleFontColor(GRAY_FONT_COLOR)
             .gridValues(new LinkedHashMap<>()) // Empty default map
-            .fontFamilyType(FontFamilyType.ROBOTO_REGULAR) // Default font
+            .fontFamilyType(FontFamilyType.ROBOTO_MEDIUM) // Default font
             .fontSize(TEN_FONT_SIZE) // Default font size
             .fontColor(BLACK_FONT_COLOR) // Default black color
             .isJobStatusInclusion(false) // Default jobStatus Table as false

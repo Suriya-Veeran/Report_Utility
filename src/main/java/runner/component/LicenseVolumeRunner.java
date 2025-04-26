@@ -39,7 +39,7 @@ public class LicenseVolumeRunner implements CommonRunner {
               .gridValues(buildJobSummaryParameters(reportNameConstants))
               .title(JOB_SUMMARY)
               .tableType(TableType.SUMMARY)
-              .isJobStatusInclusion(true)
+//              .isJobStatusInclusion(true)
               .build());
 
       report.addComponent(
@@ -57,11 +57,11 @@ public class LicenseVolumeRunner implements CommonRunner {
       List<ChartInputBean> chartInputBeans = new LinkedList<>();
       chartInputBeans.add(
           ChartInputBean.builder()
-              .chartTitle("Table")
-              .chartFontSize(16)
+              .chartTitle("Volume")
+              .chartFontSize(30)
               .chartWidth("500px")
-              .chartHeight("400px")
-              .chartType("pie")
+              .chartHeight("500px")
+              .chartType("doughnut")
               .chartFontFamily(FontFamilyType.HELVETICA)
               .legendInfo(pieData)
               .dataInfo(pieDataInfoList)
@@ -76,10 +76,10 @@ public class LicenseVolumeRunner implements CommonRunner {
               buildDataInfoBean("Disposed", 512, FormatTypes.MB, "#9AC2FC"));
       chartInputBeans.add(
           ChartInputBean.builder()
-              .chartTitle("Files")
-              .chartFontSize(16)
+              .chartTitle("Consumption")
+              .chartFontSize(30)
               .chartWidth("500px")
-              .chartHeight("400px")
+              .chartHeight("500px")
               .chartType("doughnut")
               .chartFontFamily(FontFamilyType.HELVETICA)
               .legendInfo(doughnutData)
@@ -89,7 +89,7 @@ public class LicenseVolumeRunner implements CommonRunner {
       ChartCreationConfig chartCreationConfig =
           ChartCreationConfig.builder()
               .title("Session Metrics")
-              .titleFontFamily(FontFamilyType.ROBOTO_MEDIUM)
+              .titleFontFamily(FontFamilyType.ROBOTO_BOLD)
               .titleFontSize(13)
               .imageWidth(400)
               .imageHeight(250)

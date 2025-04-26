@@ -5,7 +5,8 @@ import lombok.Getter;
 @Getter
 public enum JobStatusEnum {
   SUCCESS("Success"),
-  FAILURE("Failure"),
+  FAILURE("Failed"),
+  FAILURE_WITH_ERROR("Failed With Error"),
   WARNING("Warning");
 
   private String status;

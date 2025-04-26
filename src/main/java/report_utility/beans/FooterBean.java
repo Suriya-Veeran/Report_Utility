@@ -19,6 +19,6 @@ public class FooterBean implements ReportBean {
       FooterBean.builder()
           .fontSize(8f)
           .fontColor("#3F3F3F")
-          .fontFamily(FontFamilyType.ROBOTO_REGULAR)
+          .fontFamily(FontFamilyType.ROBOTO_MEDIUM)
           .build();
 }

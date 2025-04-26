@@ -2,9 +2,12 @@ package runner.component;
 
 import lombok.extern.slf4j.Slf4j;
 import report_utility.beans.*;
+import report_utility.constants.FontSizeConstants;
 import report_utility.core.Report;
 import report_utility.core.ReportBuilder;
 import report_utility.enums.ComponentType;
+import report_utility.enums.FontFamilyType;
+import report_utility.enums.JobStatusEnum;
 import report_utility.enums.TableType;
 import runner.enums.ReportNameConstants;
 import runner.services.CommonRunner;
@@ -15,6 +18,7 @@ import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import static report_utility.constants.FontSizeConstants.EIGHT_FONT_SIZE;
 import static runner.constants.CommonConstants.JOB_SUMMARY;
 import static runner.utils.DataBuilderUtils.*;
 
@@ -36,6 +40,13 @@ public class ConsolidatedIngestionValidationRunner implements CommonRunner {
                             .title(JOB_SUMMARY)
                             .tableType(TableType.SUMMARY)
                             .isJobStatusInclusion(true)
+//                            .jobStatusInputBean(JobStatusInputBean.builder()
+//                                    .jobStatus(JobStatusEnum.FAILURE)
+//                                    .errorMessage("Ingestion Failed Due To Some Issue")
+//                                    .jobStatusFontFamily(FontFamilyType.ROBOTO_BOLD_ITALIC)
+//                                    .errorMessageFontFamily(FontFamilyType.ROBOTO_MEDIUM)
+//                                    .fontSize(EIGHT_FONT_SIZE)
+//                                    .build())
                             .build());
 
             report.addComponent(
@@ -52,9 +63,10 @@ public class ConsolidatedIngestionValidationRunner implements CommonRunner {
 
             MultipleCardBean multipleCard =
                     MultipleCardBean.builder()
-                            .title("Table Details")
+                            .title("Table Level Details")
                             .headerValue("ADS_DEMO_CHECK")
                             .subHeaderValue("_003_METADATA_ADS.ADS_CONTENT_FS")
+                            .valueFontSize(FontSizeConstants.NINE_FONT_SIZE)
                             .values(multipleCardValues)
                             .build();
             report.addComponent(ComponentType.CARD_SECTION, multipleCard);

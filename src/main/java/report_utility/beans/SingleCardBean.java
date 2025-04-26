@@ -30,7 +30,7 @@ public class SingleCardBean extends CardBean {
           .headerFontColor(GRAY_FONT_COLOR)
           .headerFontSize(TEN_FONT_SIZE)
           .headerFontFamily(FontFamilyType.ROBOTO_MEDIUM)
-          .valueFontFamily(FontFamilyType.ROBOTO_REGULAR)
+          .valueFontFamily(FontFamilyType.ROBOTO_MEDIUM)
           .valueFontColor(GRAY_FONT_COLOR)
           .valueFontSize(TEN_FONT_SIZE)
           .cardBackgroundColor(LIGHT_BLUE_FONT_COLOR)

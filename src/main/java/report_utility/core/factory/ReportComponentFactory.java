@@ -3,6 +3,7 @@ package report_utility.core.factory;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+import report_utility.beans.TableBeanForPurge;
 import report_utility.beans.*;
 import report_utility.core.ReportBuilder;
 import report_utility.core.interfaces.ReportBean;
@@ -28,11 +29,20 @@ public class ReportComponentFactory {
             case CARD_SECTION:
                 component = ReportBuilder.addComponent((CardBean) bean);
                 break;
+            case COC_CARD_SECTION:
+                component = ReportBuilder.addComponent((CocCardBean) bean);
+                break;
             case OBJECTIVE:
                 component = ReportBuilder.addComponent((ObjectiveBean) bean);
                 break;
             case TABLE:
                 component = ReportBuilder.addComponent((TableBean) bean);
+                break;
+            case TABLE_FOR_PURGE:
+                component = ReportBuilder.addComponent((TableBeanForPurge) bean);
+                break;
+            case TITLE:
+                component = ReportBuilder.addComponent((TitleBean) bean);
                 break;
             case CHART_SECTION:
                 component = ReportBuilder.addComponent((ChartCreationConfig) bean);

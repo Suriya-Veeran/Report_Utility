@@ -5,10 +5,7 @@ import report_utility.beans.*;
 import report_utility.beans.charts.DataInfoBean;
 import report_utility.core.Report;
 import report_utility.core.ReportBuilder;
-import report_utility.enums.ComponentType;
-import report_utility.enums.FontFamilyType;
-import report_utility.enums.FormatTypes;
-import report_utility.enums.TableType;
+import report_utility.enums.*;
 import runner.enums.ReportNameConstants;
 import runner.services.CommonRunner;
 
@@ -42,6 +39,13 @@ public class SourceToValidationRunner implements CommonRunner {
               .title(JOB_SUMMARY)
               .tableType(TableType.SUMMARY)
               .isJobStatusInclusion(true)
+//                  .jobStatusInputBean(JobStatusInputBean.builder()
+//                          .jobStatus(JobStatusEnum.FAILURE)
+//                          .errorMessage("Schema ad_test_dbo2 is not found")
+//                          .jobStatusFontFamily(FontFamilyType.ROBOTO_BOLD_ITALIC)
+//                          .errorMessageFontFamily(FontFamilyType.ROBOTO_MEDIUM)
+//                          .fontSize(8f)
+//                          .build())
               .build());
 
       report.addComponent(
@@ -50,48 +54,67 @@ public class SourceToValidationRunner implements CommonRunner {
               .description(buildObjectiveDescription(reportNameConstants))
               .build());
 
-      List<String> pieData = List.of("350 GB", "650 GB");
+//      List<String> pieData = List.of("Succeeded");
+      List<String> pieData = List.of("Succeeded", "Failed");
       List<DataInfoBean> pieDataInfoList =
           List.of(
-              buildDataInfoBean("350 GB", 350, FormatTypes.GB, "#397EE3"),
-              buildDataInfoBean("650 GB", 650, FormatTypes.GB, "#9AC2FC"));
+              buildDataInfoBean("Succeeded", 1, FormatTypes.GB, "#397EE3"),
+              buildDataInfoBean("Failed", 250, FormatTypes.MB, "#E53939"));
 
       List<ChartInputBean> chartInputBeans = new LinkedList<>();
       chartInputBeans.add(
           ChartInputBean.builder()
               .chartTitle("Table")
-              .chartFontSize(16)
+              .chartFontSize(30)
               .chartWidth("500px")
-              .chartHeight("400px")
+              .chartHeight("500px")
               .chartType("pie")
               .chartFontFamily(FontFamilyType.HELVETICA)
               .legendInfo(pieData)
               .dataInfo(pieDataInfoList)
               .build());
 
-      List<String> doughnutData = List.of("Structured", "Unstructured", "Compliance", "Disposed");
-      List<DataInfoBean> doughnutDataInfoList =
-          List.of(
-              buildDataInfoBean("Structured", 347, FormatTypes.GB, "#397EE3"),
-              buildDataInfoBean("Unstructured", 100, FormatTypes.GB, "#406292"),
-              buildDataInfoBean("Compliance", 32, FormatTypes.GB, "#697A91"),
-              buildDataInfoBean("Disposed", 512, FormatTypes.MB, "#9AC2FC"));
+//      List<String> doughnutData = List.of("Structured", "Unstructured", "Compliance", "Disposed");
+//      List<DataInfoBean> doughnutDataInfoList =
+//          List.of(
+//              buildDataInfoBean("Structured", 347, FormatTypes.GB, "#397EE3"),
+//              buildDataInfoBean("Unstructured", 100, FormatTypes.GB, "#406292"),
+//              buildDataInfoBean("Compliance", 32, FormatTypes.GB, "#697A91"),
+//              buildDataInfoBean("Disposed", 512, FormatTypes.MB, "#9AC2FC"));
+//      chartInputBeans.add(
+//          ChartInputBean.builder()
+//              .chartTitle("Files")
+//              .chartFontSize(16)
+//              .chartWidth("600px")
+//              .chartHeight("500px")
+//              .chartType("doughnut")
+//              .chartFontFamily(FontFamilyType.HELVETICA)
+//              .legendInfo(doughnutData)
+//              .dataInfo(doughnutDataInfoList)
+//              .build());
+
+//      List<String> pieData1 = List.of("Succeeded");
+      List<String> pieData1 = List.of("Succeeded", "Failed");
+      List<DataInfoBean> pieDataInfoList1 =
+              List.of(
+                      buildDataInfoBean("Succeeded", 1, FormatTypes.GB, "#397EE3"),
+                      buildDataInfoBean("Failed", 100, FormatTypes.MB, "#E53939"));
       chartInputBeans.add(
-          ChartInputBean.builder()
-              .chartTitle("Files")
-              .chartFontSize(16)
-              .chartWidth("500px")
-              .chartHeight("400px")
-              .chartType("doughnut")
-              .chartFontFamily(FontFamilyType.HELVETICA)
-              .legendInfo(doughnutData)
-              .dataInfo(doughnutDataInfoList)
-              .build());
+              ChartInputBean.builder()
+                      .chartTitle("Files")
+                      .chartFontSize(30)
+                      .chartWidth("500px")
+                      .chartHeight("500px")
+                      .chartType("pie")
+                      .chartFontFamily(FontFamilyType.HELVETICA)
+                      .legendInfo(pieData1)
+                      .dataInfo(pieDataInfoList1)
+                      .build());
 
       ChartCreationConfig chartCreationConfig =
           ChartCreationConfig.builder()
               .title("Session Metrics")
-              .titleFontFamily(FontFamilyType.ROBOTO_MEDIUM)
+              .titleFontFamily(FontFamilyType.ROBOTO_BOLD)
               .titleFontSize(13)
               .imageWidth(400)
               .imageHeight(250)

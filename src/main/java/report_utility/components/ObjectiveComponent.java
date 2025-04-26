@@ -1,5 +1,6 @@
 package report_utility.components;
 
+import com.itextpdf.kernel.colors.ColorConstants;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.properties.TextAlignment;
@@ -29,16 +30,16 @@ public class ObjectiveComponent implements ReportComponent {
     public void render(Document document) throws IOException {
         inputBean = mergeWithDefaults(inputBean);
 
-        addEmptyLines(1, document);
+//        addEmptyLines(1, document);
         if (inputBean.getTitle() != null && !inputBean.getTitle().isEmpty()) {
             document.add(new Paragraph(inputBean.getTitle())
                     .setTextAlignment(TextAlignment.LEFT)
                     .setFontColor(hexaDecimalToRGB(GRAY_FONT_COLOR))
                     .setFontSize(inputBean.getTitleFontSize())
                     .setMarginLeft(MARGIN_LEFT)
-                            .setMarginTop(0)
+                    .setMarginTop(0)
                     .setMarginBottom(0)
-                            .setPadding(0)
+                    .setPadding(0)
                     .setFont(loadFont(inputBean.getTitleFontFamily().getValue()))
             );
             drawDivider(document, MARGIN_LEFT, MARGIN_RIGHT, LINE_WIDTH_ZERO_75F, "BCBCBC");
@@ -50,9 +51,11 @@ public class ObjectiveComponent implements ReportComponent {
                     .setFontColor(hexaDecimalToRGB(GRAY_FONT_COLOR))
                     .setFontSize(inputBean.getDescriptionFontSize())
                     .setMarginLeft(MARGIN_LEFT)
+                     .setMultipliedLeading(1f)
+                     .setMarginTop(MARGIN_TOP)
                     .setPaddingTop(0)
                     .setMarginBottom(0)
-                            .setPadding(0)
+                     .setPadding(0)
                     .setFont(loadFont(inputBean.getDescriptionFontFamily().getValue()))
             );
         }

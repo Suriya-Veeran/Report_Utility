@@ -7,12 +7,10 @@ import com.itextpdf.kernel.font.PdfFont;
 import com.itextpdf.kernel.geom.Rectangle;
 import com.itextpdf.kernel.pdf.PdfPage;
 import com.itextpdf.kernel.pdf.canvas.PdfCanvas;
+import com.itextpdf.kernel.pdf.canvas.draw.SolidLine;
 import com.itextpdf.layout.Canvas;
 import com.itextpdf.layout.Document;
-import com.itextpdf.layout.element.Cell;
-import com.itextpdf.layout.element.Image;
-import com.itextpdf.layout.element.Paragraph;
-import com.itextpdf.layout.element.Table;
+import com.itextpdf.layout.element.*;
 import com.itextpdf.layout.properties.HorizontalAlignment;
 import com.itextpdf.layout.properties.TextAlignment;
 import com.itextpdf.layout.properties.UnitValue;
@@ -72,7 +70,7 @@ public class HeaderEventHandler implements IEventHandler {
             Cell titleCell = new Cell().add(title)
                     .setBorder(null)
                     .setPaddingTop(13)
-                    .setPaddingBottom(5)
+                    .setPaddingBottom(9)
                     .setPaddingLeft(17)
                     .setBackgroundColor(hexaDecimalToRGB("F9F9F9"))
                     .setKeepTogether(false)
@@ -89,7 +87,7 @@ public class HeaderEventHandler implements IEventHandler {
                 Cell logoCell = new Cell()
                         .add(logo)
                         .setPaddingRight(17f)
-                        .setPaddingTop(15f)
+                        .setPaddingTop(18f)
                         .setPaddingBottom(3f)
                         .setBackgroundColor(hexaDecimalToRGB("F9F9F9"))
                         .setBorder(null);
@@ -98,11 +96,27 @@ public class HeaderEventHandler implements IEventHandler {
                 headerTable.addCell(new Cell().setBorder(null));
             }
             canvas.add(headerTable);
+            // Add the divider inside the canvas (only change)
+            SolidLine solidLine = new SolidLine(1f);
+            solidLine.setColor(hexaDecimalToRGB("E9E9E9"));
+            LineSeparator lineSeparator = new LineSeparator(solidLine);
+            lineSeparator.setWidth(width+36);
+            lineSeparator.setMarginLeft(-36);
+            lineSeparator.setMarginTop(44);
+            lineSeparator.setMarginBottom(1);
+
+            canvas.add(new Paragraph().setMargin(0).setPadding(0).add(lineSeparator));
             canvas.close();
-            drawDivider(document, 1L, "E9E9E9", "Header");
+//            drawDivider(document, 1L, "E9E9E9", "Header");
+
+
+
+
+
         } catch (IOException e) {
             log.error("Error in HeaderEventHandler: {}", e.getMessage(), e);
         }
+
 
     }
 

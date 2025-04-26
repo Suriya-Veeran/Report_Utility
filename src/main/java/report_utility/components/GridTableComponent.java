@@ -18,10 +18,13 @@
     import lombok.NoArgsConstructor;
     import report_utility.beans.GridTableBean;
     import report_utility.beans.JobStatusInputBean;
+    import report_utility.constants.ColorConstants;
+    import report_utility.constants.FontSizeConstants;
     import report_utility.core.interfaces.ReportComponent;
     import report_utility.enums.FontFamilyType;
     import report_utility.enums.TableType;
 
+    import javax.swing.text.StyleConstants;
     import java.io.IOException;
     import java.util.LinkedHashMap;
     import java.util.Map;
@@ -107,11 +110,11 @@
                     ? "F9F9F9"
                     : WHITE_FONT_COLOR;
 
-            float valueFontSize = inputBean.getFontSize();
-            float headerFontSize = inputBean.getFontSize() - 1;
+            float valueFontSize = inputBean.getFontSize()-1;
+            float headerFontSize = inputBean.getFontSize() - 2;
 
-            PdfFont headerFont = loadFont(inputBean.getFontFamilyType().getValue());
-            PdfFont valueFont = loadFont(FontFamilyType.ROBOTO_MEDIUM.getValue());
+            PdfFont headerFont = loadFont(FontFamilyType.ROBOTO_MEDIUM.getValue());
+            PdfFont valueFont = loadFont(inputBean.getFontFamilyType().getValue());
 
             for (Map.Entry<String, String> entry : gridParameters.entrySet()) {
                 String header = entry.getKey();
@@ -123,13 +126,15 @@
                                                 .setFont(headerFont)
                                                 .setFontColor(hexaDecimalToRGB("2C2C2C"))
                                                 .setPaddingLeft(17)
+//                                                .setBold()
                                                 .setBorder(Border.NO_BORDER)
                                                 .setFontSize(headerFontSize))
                                 .add(
                                         new Paragraph(new Text(value))
                                                 .setFont(valueFont)
                                                 .setFontColor(hexaDecimalToRGB("000000"))
-                                                .setMarginTop(-5f)
+//                                               .setBold()
+                                                .setMarginTop(-6f)
                                                 .setPaddingLeft(17)
                                                 .setBorder(Border.NO_BORDER)
                                                 .setFontSize(valueFontSize))
@@ -138,6 +143,7 @@
                                 .setTextAlignment(TextAlignment.LEFT)
                                 .setVerticalAlignment(VerticalAlignment.TOP);
                 table.addCell(cell);
+                table.setMarginBottom(5f);
             }
         }
 
@@ -165,36 +171,45 @@
             Color fontColor =
                     inputBean.getJobStatusInputBean().getJobStatus().getStatus().equalsIgnoreCase("Success")
                             ? hexaDecimalToRGB("007D2B")
-                            : hexaDecimalToRGB("D60000");
+                            : inputBean.getJobStatusInputBean().getJobStatus().getStatus().equalsIgnoreCase("Failed")?
+                            hexaDecimalToRGB("D60000"): hexaDecimalToRGB("FFAA1D");
 
             jobStatusCell.add(
                     new Paragraph(new Text("Job Status : "
                             + inputBean.getJobStatusInputBean().getJobStatus().getStatus()))
-                            .setFont(loadFont(jobStatusInputBean.getFontFamily().getValue()))
+                           .setFont(loadFont(jobStatusInputBean.getJobStatusFontFamily().getValue()))
                             .setFontSize(inputBean.getJobStatusInputBean().getFontSize())
                             .setFontColor(hexaDecimalToRGB(WHITE_FONT_COLOR))
-                            .setTextAlignment(TextAlignment.LEFT)
-                            .setMarginLeft(4f));
+                            .setTextAlignment(TextAlignment.LEFT));
             jobStatusCell.setWidth(UnitValue.createPercentValue(100));
             jobStatusCell.setBackgroundColor(fontColor);
             jobStatusCell.setBorder(Border.NO_BORDER);
+            jobStatusCell.setPadding(0);
+            jobStatusCell.setPaddingLeft(6f);
+            jobStatusCell.setPaddingBottom(1.7f);
             table.addCell(jobStatusCell);
 
-            if (!inputBean.getJobStatusInputBean().getJobStatus().getStatus().equalsIgnoreCase("Success")) {
+            if (inputBean.getJobStatusInputBean().getJobStatus().getStatus().equalsIgnoreCase("Failed")) {
                 Cell errorCell = new Cell(1, 3);
                 errorCell.add(new Paragraph(new Text("Error Message : "
                                 + inputBean.getJobStatusInputBean().getErrorMessage()))
-                                .setFont(loadFont(jobStatusInputBean.getFontFamily().getValue())))
-                        .setFontSize(inputBean.getJobStatusInputBean().getFontSize())
+                                .setFont(loadFont(jobStatusInputBean.getErrorMessageFontFamily().getValue())).setMultipliedLeading(1f))
+                        .setFontSize(FontSizeConstants.NINE_FONT_SIZE)
                         .setFontColor(fontColor)
+                        .setOpacity(1f)
                         .setTextAlignment(TextAlignment.LEFT)
                         .setMarginLeft(4f);
                 errorCell.setWidth(UnitValue.createPercentValue(100));
                 errorCell.setBackgroundColor(hexaDecimalToRGB("FFEAEA"));
                 errorCell.setBorder(Border.NO_BORDER);
+                errorCell.setPadding(0);
+                errorCell.setPaddingLeft(6f);
+                errorCell.setPaddingTop(1.6f);
+                errorCell.setPaddingBottom(3.5f);
                 table.addCell(errorCell);
             }
-            table.setMarginTop(2);
+            table.setMarginTop(3);
+            table.setMarginBottom(5);
             table.setFixedLayout();
 
         }

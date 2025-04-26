@@ -37,6 +37,10 @@ public class TableBean implements ReportBean {
 
   private String successFontColor;
 
+  private String drawDividerNeed;
+
+  private String emptyLineNeed;
+
   private String errorFontColor;
 
   public static final TableBean DEFAULT_CONFIG =
@@ -50,6 +54,8 @@ public class TableBean implements ReportBean {
           .headerValueFontColor(BLACK_FONT_COLOR)
           .valueBackgroundColor(WHITE_FONT_COLOR)
           .valueFontColor(BLACK_FONT_COLOR)
+              .drawDividerNeed("true")
+              .emptyLineNeed("true")
           .successFontColor("007D2B")
           .errorFontColor("D60000")
           .build();

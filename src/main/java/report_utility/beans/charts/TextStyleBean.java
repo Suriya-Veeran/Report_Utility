@@ -16,7 +16,7 @@ public class TextStyleBean {
     private String fontFamily = "Arial"; // Font family (e.g., "Arial", "Verdana", "Helvetica", etc.)
 
     @Builder.Default
-    private String fontWeight = "normal"; // Font weight (e.g., "normal", "bold", "lighter")
+    private String fontWeight = "bold"; // Font weight (e.g., "normal", "bold", "lighter")
 
     @Builder.Default
     private String color = "#000000";      // Text color (e.g., "#000000" for black, "red", etc.)

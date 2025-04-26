@@ -22,7 +22,7 @@ public class AuditReportRunner implements CommonRunner {
 
         try {
             Report report = new ReportBuilder(location, reportNameConstants.getFileName()).build();
-            report.addComponent(ComponentType.HEADER, HeaderBean.DEFAULT_CONFIG);
+            report.addComponent(ComponentType.HEADER, HeaderBean.builder().title(reportNameConstants.getReportName()).build());
 
             report.addComponent(
                     ComponentType.GRID_SECTION, GridTableBean.builder().gridValues(buildHeaderParameters(reportNameConstants)).build());
@@ -53,6 +53,15 @@ public class AuditReportRunner implements CommonRunner {
             report.addComponent(
                     ComponentType.CARD_SECTION,
                     SingleCardBean.builder().header(secondHeader).value(secondHeaderValue).build());
+
+            report.addComponent(
+                    ComponentType.CARD_SECTION,
+                    SingleCardBean.builder().header(firstHeader).value(firstHeaderValue).build());
+
+            report.addComponent(
+                    ComponentType.CARD_SECTION,
+                    SingleCardBean.builder().header(secondHeader).value(secondHeaderValue).build());
+
 
             report.addComponent(ComponentType.FOOTER, FooterBean.DEFAULT_CONFIG);
             report.render();

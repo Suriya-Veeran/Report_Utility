@@ -8,21 +8,23 @@ import static report_utility.utils.CommonUtils.*;
 import static report_utility.utils.chart.ChartCreationConfigUtil.buildHtmlCreationInfoBean;
 import static report_utility.utils.screenshot_utils.HeadlessScreenshot.takeScreenshot;
 
+import com.itextpdf.kernel.colors.ColorConstants;
+import com.itextpdf.kernel.geom.PageSize;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.borders.Border;
-import com.itextpdf.layout.element.Cell;
-import com.itextpdf.layout.element.Image;
-import com.itextpdf.layout.element.Paragraph;
-import com.itextpdf.layout.element.Table;
+import com.itextpdf.layout.element.*;
 import com.itextpdf.layout.properties.HorizontalAlignment;
 import com.itextpdf.layout.properties.TextAlignment;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+
+import com.itextpdf.layout.properties.UnitValue;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.checkerframework.checker.units.qual.A;
 import report_utility.beans.ChartCreationConfig;
 import report_utility.beans.charts.HtmlCreationInfoBean;
 import report_utility.core.interfaces.ReportComponent;
@@ -41,6 +43,8 @@ public class ChartComponent implements ReportComponent {
 
     inputBean = mergeWithDefaults(inputBean);
 
+    addEmptyLines(1, document);
+
     if (inputBean.getTitle() != null && !inputBean.getTitle().isEmpty()) {
       document.add(
           new Paragraph(inputBean.getTitle())
@@ -50,7 +54,7 @@ public class ChartComponent implements ReportComponent {
               .setMarginLeft(MARGIN_LEFT)
               .setMarginTop(0)
               .setMarginBottom(0)
-              .setPadding(0)
+              .setPadding(0)//Header Part
               .setFont(loadFont(inputBean.getTitleFontFamily().getValue())));
       drawDivider(document, MARGIN_LEFT, MARGIN_RIGHT, LINE_WIDTH_1L, DIVIDER_GRAY_COLOR);
     }
@@ -61,6 +65,7 @@ public class ChartComponent implements ReportComponent {
 
     Table chartTable = new Table(inputBean.getChartInputBean().size());
     chartTable.setMarginLeft(MARGIN_LEFT);
+    chartTable.setWidth(UnitValue.createPercentValue(100));
     for (HtmlCreationInfoBean htmlCreationInfoBean : htmlCreationInfoBeans) {
       File htmlFile = HtmlFileGenerator.generateHtml(htmlCreationInfoBean);
       Image chart =
@@ -74,14 +79,18 @@ public class ChartComponent implements ReportComponent {
               .add(chart)
               .setTextAlignment(TextAlignment.LEFT)
               .setHorizontalAlignment(HorizontalAlignment.LEFT)
-              .setBorder(Border.NO_BORDER);
+              .setBorder(Border.NO_BORDER)
+              ;
       chartCell.setPaddingLeft(-80f);
       chartTable.addCell(chartCell);
-      chartTable.setMarginTop(-10f);
+      chartTable.setMarginTop(10f);
     }
-    chartTable.setFixedLayout();
+//    chartTable.setFixedLayout();
     document.add(chartTable);
-    addEmptyLines(5, document);
+
+
+    addEmptyLines(8, document);//Before That Value Was 5
+
   }
 
   private ChartCreationConfig mergeWithDefaults(ChartCreationConfig inputBean) {

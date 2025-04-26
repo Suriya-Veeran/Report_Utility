@@ -24,7 +24,7 @@ public class LabelInfoBean {
     @Builder.Default
     private String color = "#000000"; // Color of the label text
     @Builder.Default
-    private String fontWeight = "normal"; // Font weight (e.g., normal, bold)
+    private String fontWeight = "bold"; // Font weight (e.g., normal, bold)
     @Builder.Default
     private String fontFamily = "Helvetica"; // Font family (e.g., Arial, Verdana)
     @Builder.Default

@@ -28,7 +28,7 @@ public class HeaderBean implements ReportBean {
             .title("")
             .fontColor("#030303")
             .fontSize(SIXTEEN_FONT_SIZE)
-            .fontFamily(FontFamilyType.ROBOTO_REGULAR)
+            .fontFamily(FontFamilyType.ROBOTO_BOLD)
             .productLogo(ProductLogo.ARCHON_DATA_STORE)
             .build();
 

@@ -1,5 +1,7 @@
 package report_utility.beans;
 
+
+
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,33 +12,34 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import static report_utility.constants.ColorConstants.BLACK_FONT_COLOR;
-import static report_utility.constants.FontSizeConstants.TEN_FONT_SIZE;
+import static report_utility.constants.FontSizeConstants.ELEVEN_FONT_SIZE;
 
 @Getter
 @Setter
 @SuperBuilder
 public class MultipleCardBean extends CardBean {
 
-  private String title;
+    private String title;
 
-  @Builder.Default private Map<String, String> values = new LinkedHashMap<>(); // for Multiple
+    @Builder.Default private Map<String, String> values = new LinkedHashMap<>(); // for Multiple
 
-  private String headerValue; // for multiple
+    private String headerValue; // for multiple
 
-  private String subHeaderValue; // for multiple
+    private String subHeaderValue; // for multiple
 
-  public static final MultipleCardBean DEFAULT_CONFIG =
-      MultipleCardBean.builder()
-              .title("")
-          .values(new LinkedHashMap<>())
-          .headerValue("")
-          .subHeaderValue("")
-          .headerFontColor("2C2C2C")
-          .headerFontSize(TEN_FONT_SIZE)
-          .headerFontFamily(FontFamilyType.ROBOTO_MEDIUM)
-          .valueFontFamily(FontFamilyType.ROBOTO_REGULAR)
-          .valueFontColor(BLACK_FONT_COLOR)
-          .valueFontSize(TEN_FONT_SIZE)
-          .cardBackgroundColor("E8EDF7")
-          .build();
+    public static final MultipleCardBean DEFAULT_CONFIG =
+            MultipleCardBean.builder()
+                    .title("")
+                    .values(new LinkedHashMap<>())
+                    .headerValue("")
+                    .subHeaderValue("")
+                    .headerFontColor("2C2C2C")
+                    .headerFontSize(ELEVEN_FONT_SIZE)
+                    .headerFontFamily(FontFamilyType.ROBOTO_MEDIUM)
+                    .valueFontFamily(FontFamilyType.ROBOTO_REGULAR)
+                    .valueFontColor(BLACK_FONT_COLOR)
+                    .valueFontSize(ELEVEN_FONT_SIZE)
+                    .cardBackgroundColor("E8EDF7")
+                    .build();
 }
+
