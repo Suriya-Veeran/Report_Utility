@@ -1,3 +1,3 @@
 # config.yml
-location: "C:\\Projects_Git\\Chart_Poc\\pdf"
+location: "/home/abirami/IdeaProjects/Report_Utility/output"
 reportName: "License Volume Statistics Report"
