@@ -1,5 +1,6 @@
 package com.p3.ads.runner;
 
+import com.p3.ads.beans.*;
 import com.p3.ads.core.Report;
 import com.p3.ads.core.ReportBuilder;
 import com.p3.ads.enums.ComponentType;
@@ -11,7 +12,7 @@ import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import static runner.constants.CommonConstants.JOB_SUMMARY;
+import static com.p3.ads.runner.constants.CommonConstants.JOB_SUMMARY;
 
 public class ConsolidatedIngestionValidationReport {
   public static void main(String[] args) {

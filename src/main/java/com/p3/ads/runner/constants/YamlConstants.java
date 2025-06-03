@@ -1,4 +1,4 @@
-package com.p3.ads.runner.constants;
+package com.p3.ads.com.p3.ads.runner.constants;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;

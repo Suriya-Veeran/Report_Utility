@@ -1,5 +1,6 @@
 package com.p3.ads.runner;
 
+import com.p3.ads.beans.*;
 import com.p3.ads.core.Report;
 import com.p3.ads.core.ReportBuilder;
 import com.p3.ads.enums.ComponentType;
@@ -13,6 +14,10 @@ import java.time.LocalDate;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
+import static com.p3.ads.constants.ColorConstants.BLACK_FONT_COLOR;
+import static com.p3.ads.constants.ColorConstants.GRAY_FONT_COLOR;
+import static com.p3.ads.constants.FontSizeConstants.*;
 
 public class BillingDashBoardReportRunner {
     public static void main(String[] args) {

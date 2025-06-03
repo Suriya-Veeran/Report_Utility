@@ -1,20 +1,21 @@
 package com.p3.ads.runner.component;
 
-import static runner.constants.CommonConstants.JOB_SUMMARY;
-import static runner.utils.DataBuilderUtils.*;
+import static com.p3.ads.runner.constants.CommonConstants.JOB_SUMMARY;
+import static com.p3.ads.runner.utils.DataBuilderUtils.*;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
+import com.p3.ads.beans.*;
 import lombok.extern.slf4j.Slf4j;
 import com.p3.ads.core.Report;
 import com.p3.ads.core.ReportBuilder;
 import com.p3.ads.enums.ComponentType;
 import com.p3.ads.enums.FontFamilyType;
 import com.p3.ads.enums.TableType;
-import runner.enums.ReportNameConstants;
-import runner.services.CommonRunner;
+import com.p3.ads.runner.enums.ReportNameConstants;
+import com.p3.ads.runner.services.CommonRunner;
 
 @Slf4j
 public class TableOptimizationRunner implements CommonRunner {

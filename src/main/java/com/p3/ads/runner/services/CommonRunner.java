@@ -1,6 +1,6 @@
 package com.p3.ads.runner.services;
 
-import runner.enums.ReportNameConstants;
+import com.p3.ads.runner.enums.ReportNameConstants;
 
 public interface CommonRunner {
 

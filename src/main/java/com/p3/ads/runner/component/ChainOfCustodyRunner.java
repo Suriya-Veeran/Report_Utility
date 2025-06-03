@@ -1,5 +1,6 @@
 package com.p3.ads.runner.component;
 
+import com.p3.ads.beans.*;
 import com.p3.ads.core.Report;
 import com.p3.ads.core.ReportBuilder;
 import com.p3.ads.enums.ComponentType;
@@ -7,16 +8,16 @@ import com.p3.ads.enums.FontFamilyType;
 import com.p3.ads.enums.JobStatusEnum;
 import com.p3.ads.enums.TableType;
 import lombok.extern.slf4j.Slf4j;
-import runner.enums.ReportNameConstants;
-import runner.services.CommonRunner;
+import com.p3.ads.runner.enums.ReportNameConstants;
+import com.p3.ads.runner.services.CommonRunner;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static runner.constants.CommonConstants.JOB_SUMMARY;
-import static runner.utils.DataBuilderUtils.*;
+import static com.p3.ads.runner.constants.CommonConstants.JOB_SUMMARY;
+import static com.p3.ads.runner.utils.DataBuilderUtils.*;
 
 @Slf4j
 public class ChainOfCustodyRunner implements CommonRunner {
@@ -39,7 +40,7 @@ public class ChainOfCustodyRunner implements CommonRunner {
               .title(JOB_SUMMARY)
               .tableType(TableType.SUMMARY)
               .isJobStatusInclusion(true)
-                            .jobStatusInputBean(JobStatusInputBean.builder()
+                            .jobStatusInputBean( JobStatusInputBean.builder()
                             .jobStatus(JobStatusEnum.FAILURE)
                             .errorMessage("Schema ad_test_dbo2 is not found")
                             .jobStatusFontFamily(FontFamilyType.ROBOTO_BOLD_ITALIC)

@@ -1,5 +1,6 @@
 package com.p3.ads.runner;
 
+import com.p3.ads.beans.*;
 import com.p3.ads.core.Report;
 import com.p3.ads.core.ReportBuilder;
 import com.p3.ads.enums.ComponentType;
@@ -13,7 +14,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import static runner.constants.CommonConstants.JOB_SUMMARY;
+import static com.p3.ads.runner.constants.CommonConstants.JOB_SUMMARY;
 
 public class Runner {
 

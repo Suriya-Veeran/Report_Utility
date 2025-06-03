@@ -1,20 +1,24 @@
 package com.p3.ads.runner.component;
 
+import com.p3.ads.beans.FooterBean;
+import com.p3.ads.beans.GridTableBean;
+import com.p3.ads.beans.HeaderBean;
+import com.p3.ads.beans.ObjectiveBean;
 import com.p3.ads.core.Report;
 import com.p3.ads.core.ReportBuilder;
 import com.p3.ads.enums.ComponentType;
 import com.p3.ads.enums.TableType;
 import lombok.extern.slf4j.Slf4j;
-import runner.enums.ReportNameConstants;
-import runner.services.CommonRunner;
+import com.p3.ads.runner.enums.ReportNameConstants;
+import com.p3.ads.runner.services.CommonRunner;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import static runner.constants.CommonConstants.JOB_SUMMARY;
-import static runner.utils.DataBuilderUtils.*;
+import static com.p3.ads.runner.constants.CommonConstants.JOB_SUMMARY;
+import static com.p3.ads.runner.utils.DataBuilderUtils.*;
 
 @Slf4j
 public class MaterializedViewRunner implements CommonRunner {

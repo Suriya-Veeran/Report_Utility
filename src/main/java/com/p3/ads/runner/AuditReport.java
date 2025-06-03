@@ -1,5 +1,9 @@
 package com.p3.ads.runner;
 
+import com.p3.ads.beans.FooterBean;
+import com.p3.ads.beans.GridTableBean;
+import com.p3.ads.beans.HeaderBean;
+import com.p3.ads.beans.SingleCardBean;
 import com.p3.ads.core.Report;
 import com.p3.ads.core.ReportBuilder;
 import com.p3.ads.enums.ComponentType;

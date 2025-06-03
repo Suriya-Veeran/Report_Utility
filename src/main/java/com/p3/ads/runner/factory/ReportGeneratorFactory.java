@@ -1,9 +1,9 @@
 package com.p3.ads.runner.factory;
 
 import lombok.experimental.UtilityClass;
-import runner.component.*;
-import runner.enums.ReportNameConstants;
-import runner.services.CommonRunner;
+import com.p3.ads.runner.component.*;
+import com.p3.ads.runner.enums.ReportNameConstants;
+import com.p3.ads.runner.services.CommonRunner;
 
 @UtilityClass
 public class ReportGeneratorFactory {

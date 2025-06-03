@@ -8,13 +8,13 @@ import com.p3.ads.core.Report;
 import com.p3.ads.core.ReportBuilder;
 import com.p3.ads.enums.ComponentType;
 import lombok.extern.slf4j.Slf4j;
-import runner.enums.ReportNameConstants;
-import runner.services.CommonRunner;
+import com.p3.ads.runner.enums.ReportNameConstants;
+import com.p3.ads.runner.services.CommonRunner;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import static runner.utils.DataBuilderUtils.buildHeaderParameters;
+import static com.p3.ads.runner.utils.DataBuilderUtils.buildHeaderParameters;
 
 @Slf4j
 public class AuditReportRunner implements CommonRunner {
